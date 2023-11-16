@@ -1,0 +1,212 @@
+<h1 mat-dialog-title>Agregar colaborador</h1>
+<mat-dialog-content>
+    <form [formGroup]="form" #formAddUser="ngForm">
+
+        <!-- Typo de docuemto -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select formControlName="docType">
+                <mat-option [value]="doc.key" *ngFor="let doc of typeDocs">{{doc.value}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.docType.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- Identificación -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Identificación</mat-label>
+            <input matInput type="number" formControlName="identCol" />
+            <mat-error *ngIf="f.identCol.errors?.required">Debe diligenciar este campo</mat-error>
+            <mat-error *ngIf="f.identCol.errors?.min">Debe contener mínimo 8 digitos</mat-error>
+        </mat-form-field>
+
+        <!-- Nombres -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input matInput type="text" formControlName="nameCol" />
+            <!-- <mat-error *ngIf="errorHandling('name', 'required')">Debe diligenciar este campo</mat-error> -->
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <mat-error *ngIf="f.nameCol.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- Apellidos -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input matInput type="text" formControlName="lastnameCol" />
+            <mat-icon matSuffix>perm_identity</mat-icon>
+            <mat-error *ngIf="f.lastnameCol.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- Fecha de nacimiento -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="pickerDBU" formControlName="birthdayCol" />
+            <mat-datepicker-toggle matSuffix [for]="pickerDBU"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDBU></mat-datepicker>
+            <mat-error *ngIf="f.birthdayCol.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- area -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Area</mat-label>
+            <input matInput type="text" formControlName="area" />
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+            <mat-error *ngIf="f.area.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- cargo -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Cargo</mat-label>
+            <input matInput type="text" formControlName="position" />
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+            <mat-error *ngIf="f.position.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+        <!-- RH -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>RH</mat-label>
+            <mat-select formControlName="rhCol">
+                <mat-option value="A+">A+</mat-option>
+                <mat-option value="A-">A-</mat-option>
+                <mat-option value="B+">B+</mat-option>
+                <mat-option value="B-">B-</mat-option>
+                <mat-option value="O+">O+</mat-option>
+                <mat-option value="O-">O-</mat-option>
+                <mat-option value="AB+">AB+</mat-option>
+                <mat-option value="AB-">AB-</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.rhCol.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- Género -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Género</mat-label>
+            <mat-select formControlName="genderCol">
+                <mat-option value="Masculino">Masculino</mat-option>
+                <mat-option value="Femenino">Femenino</mat-option>
+                <mat-option value="Femenino">No especifica</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.genderCol.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- Fecha de vinculación -->
+        <!-- <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Fecha de vinculación</mat-label>
+            <input matInput [matDatepicker]="pickerEDU" formControlName="entailmentDateUser" />
+            <mat-datepicker-toggle matSuffix [for]="pickerEDU"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEDU></mat-datepicker>
+            <mat-error *ngIf="f.entailmentDateUser.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field> -->
+
+        <!-- condicion especial -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Condición especial</mat-label>
+            <mat-select formControlName="specialCond" (selectionChange)="ChangeSpecialCond($event)">
+                <mat-option [value]="condition" *ngFor="let condition of especialCondition">{{condition}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.specialCond.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra especial condition -->
+
+        <mat-form-field *ngIf="f.specialCond.value == 'Otra'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="otherCol" />
+            <mat-error *ngIf="f.otherCol.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+        <!-- seguridad social -->
+        <!-- eps -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>EPS</mat-label>
+            <mat-select formControlName="eps" (selectionChange)="changeOtherOption($event)" >
+                <mat-option [value]="eps.eps" *ngFor="let eps of listEps">{{eps.eps}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.eps.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra eps  -->
+        <mat-form-field *ngIf="f.eps.value == 'OTRA'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="othereps" />
+            <mat-error *ngIf="f.othereps.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+        <!-- afp -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>AFP</mat-label>
+            <mat-select formControlName="afp" (selectionChange)="changeOtherOption($event)">
+                <mat-option [value]="afp.afp" *ngFor="let afp of listAfp">{{afp.afp}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.afp.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra afp  -->
+        <mat-form-field *ngIf="f.afp.value == 'OTRA'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="otherafp" />
+            <mat-error *ngIf="f.otherafp.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+        <!-- arl -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>ARL</mat-label>
+            <mat-select formControlName="arl" (selectionChange)="changeOtherOption($event)">
+                <mat-option [value]="arl.arl" *ngFor="let arl of listArl">{{arl.arl}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.arl.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra arl -->
+        <mat-form-field *ngIf="f.arl.value == 'OTRA'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="otherarl" />
+            <mat-error *ngIf="f.otherarl.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+        <!-- cesantias -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Cesantías</mat-label>
+            <mat-select formControlName="severance_pay" (selectionChange)="changeOtherOption($event)">
+                <mat-option [value]="severance.sp" *ngFor="let severance of listSeverance">{{severance.sp}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.severance_pay.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra cesantias -->
+        <mat-form-field *ngIf="f.severance_pay.value == 'OTRA'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="otherseverance_pay" />
+            <mat-error *ngIf="f.otherseverance_pay.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+        <!-- caja de compensación -->
+        <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Caja de compensación</mat-label>
+            <mat-select formControlName="compensation_box" (selectionChange)="changeOtherOption($event)">
+                <mat-option [value]="compensation.cf" *ngFor="let compensation of listCompensation">{{compensation.cf}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.compensation_box.errors?.required">Debe diligenciar este campo</mat-error>
+        </mat-form-field>
+
+        <!-- otra compensacion -->
+        <mat-form-field *ngIf="f.compensation_box.value == 'OTRA'" class="field-full-width" appearance="outline">
+            <mat-label>¿Cual?</mat-label>
+            <input matInput type="text" formControlName="othercompensation_box" />
+            <mat-error *ngIf="f.othercompensation_box.errors?.required">Debe diligenciar este campo</mat-error>
+            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
+        </mat-form-field>
+
+    </form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <app-loader *ngIf="loading"></app-loader>
+    <button mat-button *ngIf="!loading" (click)="saveUser()" [disabled]="formAddUser.invalid">
+        Agregar
+    </button>
+    <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

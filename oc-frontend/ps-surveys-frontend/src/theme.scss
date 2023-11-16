@@ -1,0 +1,59 @@
+@import '~@angular/material/theming';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@include mat-core();
+
+// $app-orange: (
+//   100: #FFCCBC,
+//   //500: #EC6743,
+//   500: #EC6840,
+//   700: #E64A19,
+//   contrast: (
+//     100: $dark-primary-text,
+//     500: $light-primary-text,
+//     700: $light-primary-text,
+//   )
+// );
+
+// $app-purple: (
+//   100: #CFD8DC,
+//   300: #90A4AE,
+//   500: #607D8B,
+//   contrast: (
+//     100: $dark-primary-text,
+//     300: $light-primary-text,
+//     500: $light-primary-text,
+//   )
+// );
+
+$app-blue-gray: (
+  100: #78909C,
+  600: #546E7A,
+  800: #37474F,
+  contrast: (
+    100: $dark-primary-text,
+    500: $light-primary-text,
+    700: $light-primary-text,
+  )
+);
+
+$app-orange: (
+  A100: #FFCCBC,
+  A300: #FF8A65,
+  A500: #EB6842,
+  contrast: (
+    100: $dark-primary-text,
+    300: $light-primary-text,
+    500: $light-primary-text,
+  )
+);
+
+$my-app-primary: mat-palette($app-blue-gray, 800, 500);
+$my-app-accent:  mat-palette($app-orange, A500, A300, A100);
+
+// $my-app-accent:  mat-palette($mat-deep-purple, A200, A100, A400);
+
+
+//$my-app-warn:    mat-palette($mat-deep-orange);
+//$my-app-warn:    mat-palette($app-orange, 700);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+@include angular-material-theme($my-app-theme);

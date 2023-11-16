@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Eliminar permiso</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+
+    <!-- Id -->
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Id:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.idPermis }}</mat-grid-tile>
+
+    <!-- Permiso -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Permiso:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.namePermis }}</mat-grid-tile>
+
+    <!-- Descripción -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Descripción:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.desPermis }}</mat-grid-tile>
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deletePermission()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>

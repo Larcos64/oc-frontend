@@ -1,0 +1,26 @@
+<h1 mat-dialog-title>Editar permiso</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formEditPermission="ngForm">
+
+    <!-- Permiso -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Permiso</mat-label>
+      <input matInput type="text" formControlName="namePermis" />
+      <mat-error *ngIf="f.namePermis.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="desPermis"></textarea>
+      <mat-error *ngIf="f.desPermis.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="editPermission()" [disabled]="!formEditPermission.dirty || formEditPermission.invalid">
+    Editar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

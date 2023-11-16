@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Agregar perfil</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddProfile="ngForm">
+    <!-- Perfil -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Perfil</mat-label>
+      <input matInput type="text" formControlName="nameProf" />
+      <mat-error *ngIf="f.nameProf.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveProfile()" [disabled]="formAddProfile.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

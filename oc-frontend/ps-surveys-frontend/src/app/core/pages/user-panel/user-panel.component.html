@@ -1,0 +1,28 @@
+<div class="user-panel" fxLayout="column" fxLayoutAlign="center center">
+  <img class="user-panel-avatar" src="assets/img/logo-Anova.png" alt="avatar" width="64" />
+  <h4 class="user-panel-name">{{fullNameUser}}</h4>
+  <h5 class="user-panel-email">{{emailUser}}</h5>
+  <div class="user-panel-icons">
+    <a mat-icon-button matTooltip="Actualizar perfil" matTooltipPosition="below" (click)="editInfo(
+      idUser,
+      idComp,
+      idProf,
+      identUser,
+      nameUser,
+      lastnameUser,
+      rhUser,
+      genderUser,
+      dateBirthUser,
+      entailmentDateUser,
+      emailUser
+    )">
+      <mat-icon disabled>account_circle</mat-icon>
+    </a>
+    <!-- <a mat-icon-button>
+      <mat-icon>settings</mat-icon>
+    </a> -->
+    <a mat-icon-button matTooltip="Cerrar sesión" matTooltipPosition="below" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </a>
+  </div>
+</div>

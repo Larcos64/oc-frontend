@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Editar perfil</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formEditProfile="ngForm">
+
+    <!-- Perfil -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Perfil</mat-label>
+      <input matInput type="text" formControlName="nameProf" />
+      <mat-error *ngIf="f.nameProf.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="editProfile()" [disabled]="!formEditProfile.dirty || formEditProfile.invalid">
+    Editar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

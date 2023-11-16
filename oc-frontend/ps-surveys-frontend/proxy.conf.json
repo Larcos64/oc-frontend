@@ -1,0 +1,7 @@
+{
+    "/anovawebapp.appspot.com/*": {
+        "target": "https://firebasestorage.googleapis.com/v0/b/",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

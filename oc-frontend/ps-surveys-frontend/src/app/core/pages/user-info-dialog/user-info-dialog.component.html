@@ -1,0 +1,100 @@
+<h1 mat-dialog-title>Actualizar perfil</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formEditUser="ngForm">
+
+    <!-- Id Usuario-->
+    <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput formControlName="idUser" required>
+    </mat-form-field>
+
+    <!-- Perfil-->
+    <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput formControlName="idProf" required>
+    </mat-form-field>
+
+    <!-- Fecha vinculación -->
+    <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput formControlName="entailmentDateUser" required>
+    </mat-form-field>
+
+    <!-- Compañia -->
+    <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput formControlName="idComp" required>
+    </mat-form-field>
+
+    <!-- Identificación -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Identificación</mat-label>
+      <input matInput type="number" formControlName="identUser" />
+      <mat-error *ngIf="f.identUser.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.identUser.errors?.min">Debe contener mínimo 8 digitos</mat-error>
+    </mat-form-field>
+
+    <!-- Nombres -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nombres</mat-label>
+      <input matInput type="text" formControlName="nameUser" />
+      <mat-icon matSuffix>perm_identity</mat-icon>
+      <mat-error *ngIf="f.nameUser.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Apellidos -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Apellidos</mat-label>
+      <input matInput type="text" formControlName="lastnameUser" />
+      <mat-icon matSuffix>perm_identity</mat-icon>
+      <mat-error *ngIf="f.lastnameUser.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- RH -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>RH</mat-label>
+      <mat-select formControlName="rhUser">
+        <mat-option value="A+">A+</mat-option>
+        <mat-option value="A-">A-</mat-option>
+        <mat-option value="B+">B+</mat-option>
+        <mat-option value="B-">B-</mat-option>
+        <mat-option value="O+">O+</mat-option>
+        <mat-option value="O-">O-</mat-option>
+        <mat-option value="AB+">AB+</mat-option>
+        <mat-option value="AB-">AB-</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.rhUser.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Género -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Género</mat-label>
+      <mat-select formControlName="genderUser">
+        <mat-option value="Masculino">Masculino</mat-option>
+        <mat-option value="Femenino">Femenino</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.genderUser.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Fecha de nacimiento -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput [matDatepicker]="pickerDBU" formControlName="dateBirthUser" />
+      <mat-datepicker-toggle matSuffix [for]="pickerDBU"></mat-datepicker-toggle>
+      <mat-datepicker #pickerDBU></mat-datepicker>
+      <mat-error *ngIf="f.dateBirthUser.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Correo -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput type="email" formControlName="emailUser" />
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error *ngIf="f.emailUser.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.emailUser.errors?.pattern">Correo inválido</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="editInfo()" [disabled]="formEditUser.invalid">
+    Actualizar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

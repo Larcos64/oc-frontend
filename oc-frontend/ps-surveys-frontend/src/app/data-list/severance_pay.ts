@@ -1,0 +1,2 @@
+export const listSeverance = [{ sp: 'PROTECCIÓN S.A.' }, { sp: 'PORVENIR S.A.' }, { sp: 'COLFONDOS PENSIONES Y CESANTÍAS' }, { sp: 'OLD MUTUAL.' },
+ { sp: 'FONDO NACIONAL DEL AHORRO' }, { sp: 'PRESTACIONES SOCIALES DEL MAGISTERIO' }, { sp: 'NINGUNA' }, { sp: 'OTRA' }];

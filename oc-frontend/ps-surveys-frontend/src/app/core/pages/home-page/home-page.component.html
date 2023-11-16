@@ -1,0 +1,25 @@
+<mat-toolbar>
+    <mat-toolbar-row class="toolbar-row-title">
+        <h1>Clima Laboral SAS</h1>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row class="toolbar-row-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+                    <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+                    <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+                    <ng-container *ngIf="!navlink.url">
+                        <span class="link">{{navlink.name}}</span>
+                    </ng-container>
+                </li>
+            </ol>
+        </nav>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+    <div class="water-mark">
+        <img id="img" src="assets/img/logo-Anova.png" alt="">
+    </div>
+</div>

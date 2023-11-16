@@ -1,0 +1,125 @@
+<mat-toolbar>
+
+  <mat-toolbar-row class="toolbar-row-title">
+    <h1>Sitios De Trabajo {{nameComp}}</h1>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="toolbar-row-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+          <ng-container *ngIf="!navlink.url">
+            <span class="link">{{navlink.name}}</span>
+          </ng-container>
+        </li>
+      </ol>
+    </nav>
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<div class="container mat-elevation-z2">
+  <mat-card>
+    <mat-card-content>
+      <div class="form">
+        <mat-form-field class="field-full-width" appearance="legacy">
+          <mat-label>Buscar sitio de trabajo</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+            [disabled]="data.length == 0" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+          <!-- Nombre -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+              Nombre
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.nameWorkplace }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Dirección -->
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef>
+              Dirección
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.addressWorkplace }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Teléfono -->
+          <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef> Teléfono </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.phoneWorkplace }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              Acciones
+            </mat-header-cell>
+
+            <!-- Editar -->
+            <mat-cell *matCellDef="let element; let i = index">
+              <button mat-icon-button color="primary" (click)="
+                  startEdit(
+                    i,
+                    element.idWorkplace,
+                    element.idComp,
+                    element.nameWorkplace,
+                    element.addressWorkplace,
+                    element.phoneWorkplace,
+                    element.fixed,
+                    element.riskLvlWorkplace
+                  )
+                "
+                *ngIf="permEdit">
+                <mat-icon aria-label="Edit" matTooltip="Editar" matTooltipPosition="right">edit</mat-icon>
+              </button>
+
+              <!-- Eliminar -->
+              <button mat-icon-button color="warn" (click)="
+                  startDelete(
+                    i,
+                    element.idWorkplace,
+                    element.idComp,
+                    element.nameWorkplace,
+                    element.addressWorkplace,
+                    element.fixed
+                  )
+                "
+                *ngIf="permDel">
+                <mat-icon aria-label="Delete" matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsWorkplace"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsWorkplace"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="fab" *ngIf="permCreate">
+  <button mat-fab color="accent" (click)="startAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
