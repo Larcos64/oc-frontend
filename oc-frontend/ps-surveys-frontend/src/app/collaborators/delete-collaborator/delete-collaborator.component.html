@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Eliminar colaborador</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Identificación:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ collaborator.identCol }}</mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Nombre completo:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ collaborator.nameCol }} {{ collaborator.lastnameCol }}</mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>RH:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ collaborator.rhCol }}</mat-grid-tile>
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deleteUser()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>

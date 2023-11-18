@@ -1,0 +1,42 @@
+<div class="login mat-typography" fxLayout="column" fxLayoutAlign="center stretch">
+  <div fxLayout="row" fxLayoutAlign="center" class="dark-theme">
+    <div class="container mat-elevation-z10" fxFlex="0 0 100%" fxFlex.gt-sm="0 0 50%" fxFlex.gt-md="0 0 30%">
+      <!-- fxFlex="0 0 100%" fxFlex.gt-sm="0 0 50%" fxFlex.gt-md="0 0 25%" -->
+      <mat-card class="login-panel">
+        <!-- <h1 class="tittle-login">  ATS</h1> -->
+        <form #formLogin="ngForm">
+          <div fxLayout="row wrap">
+            <div class="container-logo">
+              <!-- fxFlex="0 0 80%" fxFlexOffset="40%" -->
+              <img class="login-logo" src="../../../../assets/img/logo-Anova.png">
+            </div>
+
+            <mat-form-field fxFlex="0 0 100%" appearance='outline'>
+              <mat-label class="login-label">Correo electrónico</mat-label>
+              <input matInput class="login-input" type="email" required name="email" [(ngModel)]="username">
+            </mat-form-field>
+
+            <mat-form-field fxFlex="0 0 100%" appearance='outline'>
+              <mat-label>Contraseña</mat-label>
+              <input matInput class="login-input z-depth-5" type="password" required name="pass" [(ngModel)]="password">
+            </mat-form-field>
+            <button class="login-btn" *ngIf="!loading; else loader" (click)="login()" [disabled]="formLogin.invalid"
+              fxFlex="0 0 80%" fxFlexOffset="10%" mat-raised-button color="accent">Ingresar</button>
+            <div class="forgot-pass">
+              <!-- <span><a href="#" class="link-forgot-pass">¿Olvidó su contraseña?</a></span> -->
+            </div>
+            <ng-template #loader>
+              <app-loader [align]="'center'"></app-loader>
+            </ng-template>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+  </div>
+  <div class="login-footer">
+    <p class="copyright-info">
+      © 2023 Clima Laboral SAS. All rights reserved.
+      <a href="" target="new" rel="nofollow" class="link-ceotic">Clima Laboral SAS</a>
+    </p>
+  </div>
+</div>

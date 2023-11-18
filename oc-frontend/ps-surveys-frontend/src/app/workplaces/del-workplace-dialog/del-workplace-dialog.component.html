@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Eliminar sitio de trabajo</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Nombre:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.nameWorkplace }}</mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Dirección:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.addressWorkplace }}</mat-grid-tile>
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Fija:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.fixed === true ? "Si" : "No" }}</mat-grid-tile>
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deleteWorkplace()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>
