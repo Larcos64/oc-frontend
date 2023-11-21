@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Asignar sección</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddFs="ngForm">
+
+    <!-- Estado -->
+    <label>Estado:</label>&nbsp;&nbsp;
+    <mat-radio-group formControlName="stateFs">
+      <mat-radio-button type="radio" name="stateFs" [value]="true">Activa</mat-radio-button>
+      &nbsp;&nbsp;
+      <mat-radio-button type="radio" name="stateFs" [value]="false">Inactiva</mat-radio-button>
+    </mat-radio-group>
+
+    <br /><br />
+
+    <!-- Sección -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Sección</mat-label>
+      <mat-select formControlName="idSec">
+        <mat-option [value]="sec.idSection" *ngFor="let sec of sectionsNif">{{
+          sec.nameSection
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.idSec.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Orden -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Orden</mat-label>
+      <input matInput type="number" formControlName="orderFs" />
+      <mat-error *ngIf="f.orderFs.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.orderFs.errors?.max">Debe contener máximo 4 digitos</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveFs()" [disabled]="formAddFs.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Eliminar sección</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+
+    <!-- Formato -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Formato:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.name_format }}</mat-grid-tile>
+
+    <!-- Nombre -->
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Nombre sección:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.name_sec }}</mat-grid-tile>
+
+    <!-- Descripción -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Descripción sección:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.desc_sec }}</mat-grid-tile>
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deleteFs()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>
