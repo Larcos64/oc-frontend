@@ -8,7 +8,6 @@ import { finalize } from 'rxjs/operators';
 import { CollaboratorserviceService } from '../services/collaboratorservice.service';
 import { snackError, snackOk } from '../../util/snackbar-util';
 import { Router, ActivatedRoute } from '@angular/router';
-import { listArl } from '../../data-list/arl';
 import { listEps } from '../../data-list/eps';
 import { listAfp } from '../../data-list/afp';
 import { listSeverance } from '../../data-list/severance_pay';
@@ -35,7 +34,6 @@ export class AddCollaboratorComponent implements OnInit {
 
   especialCondition = ["Motriz o de movilidad", "Auditiva", "Visual", "Cognitiva", "Discapacidad Orgánica", "Otra", "Ninguna"];
 
-  listArl = listArl;
   listEps = listEps;
   listAfp = listAfp;
   listSeverance = listSeverance;
@@ -86,7 +84,6 @@ export class AddCollaboratorComponent implements OnInit {
       othereps: ['',],
       afp: ['', Validators.required],
       otherafp: [''],
-      arl: ['', Validators.required],
       otherarl: [''],
       severance_pay: ['', Validators.required],
       otherseverance_pay: [''],
@@ -162,10 +159,6 @@ export class AddCollaboratorComponent implements OnInit {
       this.form.controls['afp'].setValue(this.form.get('otherafp').value);
     }
 
-    if (this.form.get('otherarl').value != '' && this.form.get('arl').value == 'OTRA') {
-      this.form.controls['arl'].setValue(this.form.get('otherarl').value);
-    }
-
     if (this.form.get('otherseverance_pay').value != '' && this.form.get('severance_pay').value == 'OTRA') {
       this.form.controls['severance_pay'].setValue(this.form.get('otherseverance_pay').value);
     }
@@ -179,70 +172,7 @@ export class AddCollaboratorComponent implements OnInit {
 
   buildDataEdit() {
     this.edit = true;
-
-    const indArlSaved = this.listArl.findIndex(arl => arl.arl === this.data.collaborator["arl"]);
-    const indEpsSaved = this.listEps.findIndex(arl => arl.eps === this.data.collaborator["eps"]);
-    const indafpSaved = this.listAfp.findIndex(arl => arl.afp === this.data.collaborator["afp"]);
-    const indseveranceSaved = this.listSeverance.findIndex(arl => arl.sp === this.data.collaborator["severance_pay"]);
-    const indcompensationSaved = this.listCompensation.findIndex(arl => arl.cf === this.data.collaborator["compensation_box"]);
-
-    if (indArlSaved < 0) {
-
-      this.data.collaborator.otherarl = this.data.collaborator.arl;
-      this.data.collaborator.arl = 'OTRA';
-      this.form.get('otherarl').setValidators([Validators.required]);
-      this.form.get('otherarl').updateValueAndValidity();
-
-    } else {
-      this.data.collaborator.otherarl = '';
-    }
-
-    if (indEpsSaved < 0) {
-
-      this.data.collaborator.othereps = this.data.collaborator.eps;
-      this.data.collaborator.eps = 'OTRA';
-      this.form.get('othereps').setValidators([Validators.required]);
-      this.form.get('othereps').updateValueAndValidity();
-
-    } else {
-      this.data.collaborator.othereps = '';
-    }
-
-    if (indafpSaved < 0) {
-
-      this.data.collaborator.otherafp = this.data.collaborator.afp;
-      this.data.collaborator.afp = 'OTRA';
-      this.form.get('otherafp').setValidators([Validators.required]);
-      this.form.get('otherafp').updateValueAndValidity();
-
-    } else {
-      this.data.collaborator.otherafp = '';
-    }
-
-    if (indseveranceSaved < 0) {
-
-      this.data.collaborator.otherseverance_pay = this.data.collaborator.severance_pay;
-      this.data.collaborator.severance_pay = 'OTRA';
-      this.form.get('otherseverance_pay').setValidators([Validators.required]);
-      this.form.get('otherseverance_pay').updateValueAndValidity();
-
-    } else {
-      this.data.collaborator.otherseverance_pay = '';
-    }
-
-    if (indcompensationSaved < 0) {
-
-      this.data.collaborator.othercompensation_box = this.data.collaborator.compensation_box;
-      this.data.collaborator.compensation_box = 'OTRA';
-      this.form.get('othercompensation_box').setValidators([Validators.required]);
-      this.form.get('othercompensation_box').updateValueAndValidity();
-
-    } else {
-      this.data.collaborator.othercompensation_box = '';
-    }
-
     this.form.setValue(this.data.collaborator);
-
   }
 
 }

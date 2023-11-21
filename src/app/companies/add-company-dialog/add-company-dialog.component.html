@@ -1,0 +1,97 @@
+<h1 mat-dialog-title>Agregar empresa</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddCompany="ngForm">
+
+    <div class="container">
+      <input type="file" id="logoInput" style="display: none;" (change)="validateFormat($event)"
+      accept=".png, .jpg, .jpeg, .PNG, .JPG, .JPEG" #logoInput />
+      <img [src]="logoSelected || 'assets/img/no-image.png'" (click)="logoInput.click()"
+        class="img-fluid roundedImage image" />
+      <div class="middle">
+        <div class="text" (click)="logoInput.click()">Cambiar Logo</div>
+      </div>
+      <mat-error *ngIf="f.logoComp.errors?.required">Logo requerido</mat-error>
+    </div>
+
+    <br />
+
+    <!-- Adminisrtadora -->
+    <label>Administradora:</label>&nbsp;&nbsp;
+    <mat-radio-group formControlName="flagAdmin">
+      <mat-radio-button type="radio" name="flagAdmin" [value]="true">Si</mat-radio-button>
+      &nbsp;&nbsp;
+      <mat-radio-button type="radio" name="flagAdmin" [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+
+    <br /><br />
+
+    <!-- Nit -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nit</mat-label>
+      <input matInput type="phone" formControlName="nitComp" />
+      <mat-error *ngIf="f.nitComp.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Nombre -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="nameComp" />
+      <mat-error *ngIf="f.nameComp.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Cc. Representante Legal -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Cc. Representante legal</mat-label>
+      <input matInput type="number" formControlName="identLegalRep" />
+      <mat-error *ngIf="f.identLegalRep.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.identLegalRep.errors?.min">Debe contener mínimo 8 digitos</mat-error>
+    </mat-form-field>
+
+    <!-- Representante Legal -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Representante legal</mat-label>
+      <input matInput type="text" formControlName="nameLegalRep" />
+      <mat-error *ngIf="f.nameLegalRep.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Correo electrónico empresa -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Correo electrónico empresa</mat-label>
+      <input matInput type="email" formControlName="emailComp" />
+      <!-- <mat-error *ngIf="email.invalid">{{ validateForm() }}</mat-error> -->
+      <mat-icon matSuffix>alternate_email</mat-icon>
+      <mat-error *ngIf="f.emailComp.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.emailComp.errors?.pattern">Correo inválido</mat-error>
+    </mat-form-field>
+
+    <!-- Dirección -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Dirección</mat-label>
+      <input matInput type="text" formControlName="addressComp" />
+      <mat-icon matSuffix>location_on</mat-icon>
+      <mat-error *ngIf="f.addressComp.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Teléfono -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Teléfono</mat-label>
+      <input matInput type="number" formControlName="phoneComp" />
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error *ngIf="f.phoneComp.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Número empleados -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Número empleados</mat-label>
+      <input matInput type="number" formControlName="numEmployee" />
+      <mat-error *ngIf="f.numEmployee.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="preSaveCompany()" [disabled]="formAddCompany.invalid || loading" [class.spinner]="loading">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

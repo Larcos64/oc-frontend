@@ -5,6 +5,7 @@ import { HomeComponent } from './core/pages/home/home.component';
 import { usersRoutes } from './users/users.routing';
 import { profilesRoutes } from './profiles/profiles.routing';
 import { permissionsRoutes } from './permissions/permissions.routing';
+import { companiesRoutes } from './companies/companies.routing';
 import { workplacesRoutes } from './workplaces/workplaces.routing';
 import { HomePageComponent } from './core/pages/home-page/home-page.component';
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
       ...usersRoutes,
       ...profilesRoutes,
       ...permissionsRoutes,
+      ...companiesRoutes,
       ...workplacesRoutes,
       { path: 'homePage', component: HomePageComponent },
       { path: '', redirectTo: 'companies', pathMatch: 'full' }

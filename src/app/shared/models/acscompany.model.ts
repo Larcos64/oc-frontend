@@ -12,17 +12,8 @@ export class AcsCompany {
   nameLegalRep: string;
   identLegalRep: string;
   emailComp: string;
-  ciiuComp: string;
   addressComp: string;
   phoneComp: string;
   numEmployee: number;
-  riskLvlComp: number;
   logoComp: string;
-  
-  mainEconomicActivity: string;
-  secEconomicActivity: string;
-  numEmployeeDep: number;
-  numEmployeeIndep: number;
-  numEmployeeCont: number;
-
 }

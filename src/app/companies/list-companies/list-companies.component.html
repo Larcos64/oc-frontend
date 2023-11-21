@@ -1,0 +1,165 @@
+<mat-toolbar>
+
+  <mat-toolbar-row class="toolbar-row-title">
+    <h1>Empresas</h1>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="toolbar-row-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+          <ng-container *ngIf="!navlink.url">
+            <span class="link">{{navlink.name}}</span>
+          </ng-container>
+        </li>
+
+        <!-- <li class="breadcrumb-item">
+          <a href="home" class="link">Inicio</a>
+          <ng-container>
+            <mat-icon class="chevron">chevron_right</mat-icon>
+            <span class="link">Empresas</span>
+          </ng-container>
+        </li> -->
+      </ol>
+    </nav>
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<div class="container mat-elevation-z2">
+  <mat-card>
+    <mat-card-content>
+      <div class="form">
+        <mat-form-field class="field-full-width" appearance="legacy">
+          <mat-label>Buscar empresa</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+            [disabled]="data.length == 0" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div class="table-container">
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+          <!-- Nit -->
+          <ng-container matColumnDef="nit">
+            <mat-header-cell *matHeaderCellDef>
+              NIT
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.nitComp }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Nombre -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+              Nombre
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.nameComp }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Teléfono -->
+          <ng-container matColumnDef="phone_c">
+            <mat-header-cell *matHeaderCellDef>
+              Teléfono
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.phoneComp }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Administradora -->
+          <ng-container matColumnDef="admin">
+            <mat-header-cell *matHeaderCellDef>
+              Administradora
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.flagAdmin === true ? 'Si' : 'No' }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              Acciones
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element; let i = index">
+              <!-- View Users -->
+              <button mat-icon-button color="primary" (click)="viewUsers(element.idComp)" *ngIf="permUsers">
+                <mat-icon aria-label="Usuarios" matTooltip="Usuarios" matTooltipPosition="right">supervisor_account
+                </mat-icon>
+              </button>
+
+              <!-- View Workplaces -->
+              <button mat-icon-button color="primary" (click)="viewWorkplaces(element.idComp)" *ngIf="permWorkPlace">
+                <mat-icon aria-label="Sitios" matTooltip="Sitios de Trabajo" matTooltipPosition="right">business
+                </mat-icon>
+              </button>
+
+              <!-- View Formats -->
+              <button mat-icon-button color="primary" (click)="viewFormats(element.idComp)" *ngIf="permFormats">
+                <mat-icon aria-label="Formatos" matTooltip="Formatos" matTooltipPosition="right">assignment
+                </mat-icon>
+              </button>
+
+              <!-- Edit Company -->
+              <button mat-icon-button color="primary" (click)="
+                  startEdit(
+                    i,
+                    element.flagAdmin,
+                    element.idComp,
+                    element.nameComp,
+                    element.nitComp,
+                    element.nameLegalRep,
+                    element.identLegalRep,
+                    element.emailComp,
+                    element.addressComp,
+                    element.phoneComp,
+                    element.numEmployee,
+                    element.logoComp                    
+                  )
+                "
+                *ngIf="permEdit">
+                <mat-icon aria-label="Edit" matTooltip="Editar" matTooltipPosition="right">edit</mat-icon>
+              </button>
+
+              <!-- Delete Company -->
+              <button mat-icon-button color="warn" (click)="
+                  startDelete(
+                    i,
+                    element.idComp,
+                    element.nameComp,
+                    element.nitComp
+                  )
+                "
+                *ngIf="permDel">
+                <mat-icon aria-label="Delete" matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsCompany"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsCompany"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="fab" *ngIf="permCreate">
+  <button mat-fab color="accent" (click)="startAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

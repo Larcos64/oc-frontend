@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsersModule } from './users/users.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { PermissionsModule } from './permissions/permissions.module';
+import { CompaniesModule } from './companies/companies.module';
 import { PermisrolModule } from './permisrol/permisrol.module';
 import { WorkplacesModule } from './workplaces/workplaces.module';
 import { VocabularyService } from '../services/vocabulary.service';
@@ -39,6 +40,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,
+    CompaniesModule,
     WorkplacesModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

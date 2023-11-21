@@ -22,14 +22,14 @@ export class PermisrolService {
   }
 
   deleteByIdProf(id: number): Observable<string> {
-    const url = `${environment.urlBase}/permisrol/id_prof/${id}`;
+    const url = `${environment.urlBase}/permisrol/id_role/${id}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );
   }
 
   listByIdProf(idProf: number): Observable<any[]> {
-    const url = `${environment.urlBase}/permisrol/id_prof/${idProf}`;
+    const url = `${environment.urlBase}/permisrol/id_role/${idProf}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)

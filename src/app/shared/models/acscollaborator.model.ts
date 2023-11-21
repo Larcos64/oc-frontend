@@ -20,7 +20,6 @@ export class AcsCollaborator {
     otherCol: string;
     eps: string;
     afp: string;
-    arl: string;
     severance_pay: string;
     compensation_box: string;
     // socialSecCol: string;

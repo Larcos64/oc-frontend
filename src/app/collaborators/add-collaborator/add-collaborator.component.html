@@ -149,23 +149,6 @@
             <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
         </mat-form-field>
 
-        <!-- arl -->
-        <mat-form-field class="field-full-width" appearance="outline">
-            <mat-label>ARL</mat-label>
-            <mat-select formControlName="arl" (selectionChange)="changeOtherOption($event)">
-                <mat-option [value]="arl.arl" *ngFor="let arl of listArl">{{arl.arl}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="f.arl.errors?.required">Debe diligenciar este campo</mat-error>
-        </mat-form-field>
-
-        <!-- otra arl -->
-        <mat-form-field *ngIf="f.arl.value == 'OTRA'" class="field-full-width" appearance="outline">
-            <mat-label>¿Cual?</mat-label>
-            <input matInput type="text" formControlName="otherarl" />
-            <mat-error *ngIf="f.otherarl.errors?.required">Debe diligenciar este campo</mat-error>
-            <!-- <mat-icon matSuffix>perm_identity</mat-icon> -->
-        </mat-form-field>
-
         <!-- cesantias -->
         <mat-form-field class="field-full-width" appearance="outline">
             <mat-label>Cesantías</mat-label>
