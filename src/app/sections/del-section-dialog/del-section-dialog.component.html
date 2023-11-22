@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Eliminar sección</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+
+    <!-- Nombre -->
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Nombre:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.nameSection }}</mat-grid-tile>
+
+    <!-- Descripción -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Descripción:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.descSection }}</mat-grid-tile>
+
+    <!-- Tipo -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Tipo:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.typeSection }}</mat-grid-tile>
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deleteSection()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>

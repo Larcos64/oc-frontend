@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>Editar sección</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formEditSection="ngForm">
+
+    <!-- Nombre -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="nameSection" />
+      <mat-error *ngIf="f.nameSection.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.nameSection.errors?.maxlength">Debe contener máximo 100 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descSection"></textarea>
+      <mat-error *ngIf="f.descSection.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.descSection.errors?.maxlength">Debe contener máximo 200 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Tipo -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <input matInput type="text" formControlName="typeSection" />
+      <mat-error *ngIf="f.typeSection.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.typeSection.errors?.maxlength">Debe contener máximo 10 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- ciclo -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Ciclo</mat-label>
+      <input matInput type="text" formControlName="cycle" />
+      <mat-error *ngIf="f.cycle.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="editSection()" [disabled]="!formEditSection.dirty || formEditSection.invalid">
+    Editar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

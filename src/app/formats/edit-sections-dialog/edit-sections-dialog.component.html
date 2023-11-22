@@ -1,0 +1,116 @@
+<h1 mat-dialog-title>
+  Secciones de {{ data.nameFormat }}
+</h1>
+<mat-dialog-content>
+
+  <!-- <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button> -->
+
+  <div class="container mat-elevation-z2">
+    <div class="form">
+      <mat-form-field class="field-full-width" appearance="legacy">
+        <mat-label>Buscar sección</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+          [disabled]="dataFs.length == 0" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+        <!-- Nombre -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>
+            Nombre
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.name_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Tipo -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>
+            Tipo
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.type_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Estado -->
+        <ng-container matColumnDef="state">
+          <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.state_fs === true ? "Activa" : "Inactiva" }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Orden -->
+        <ng-container matColumnDef="order">
+          <mat-header-cell *matHeaderCellDef>
+            Orden
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.order_fs }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            Acciones
+          </mat-header-cell>
+
+          <!-- Editar -->
+          <mat-cell *matCellDef="let element; let i = index">
+            <button mat-icon-button color="primary" (click)="
+                  startEdit(
+                    i,
+                    element.id_fs,
+                    element.id_sec,
+                    element.id_format,
+                    element.state_fs,
+                    element.order_fs,
+                    element.name_sec
+                  )
+                ">
+              <mat-icon matTooltip="Editar" matTooltipPosition="right">edit</mat-icon>
+            </button>
+
+            <!-- Eliminar -->
+            <button mat-icon-button color="warn" (click)="
+                  startDelete(
+                    i,
+                    element.id_fs,
+                    element.id_sec,
+                    element.id_format,
+                    element.name_sec,
+                    element.desc_sec
+                  )
+                ">
+              <mat-icon matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsFs"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsFs"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="startAdd(data.idFormat)">
+    Asignar Nueva
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cerrar
+  </button>
+</mat-dialog-actions>

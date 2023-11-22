@@ -1,18 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
-import { toArray } from 'rxjs/operators';
-import { SessionService } from 'src/app/core/services/session.service';
-import { PermitsService } from '../../services/permits.service';
-import { PermisrolService } from '../../../permisrol/services/permisrol.service';
+import { Component, OnInit, ChangeDetectorRef } from "@angular/core";
+import { MediaMatcher } from "@angular/cdk/layout";
+import { Router } from "@angular/router";
+import { toArray } from "rxjs/operators";
+import { SessionService } from "src/app/core/services/session.service";
+import { PermitsService } from "../../services/permits.service";
+import { PermisrolService } from "../../../permisrol/services/permisrol.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: "app-home",
+  templateUrl: "./home.component.html",
+  styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-
   mobileQuery: MediaQueryList;
   shouldRun: boolean;
 
@@ -41,16 +40,23 @@ export class HomeComponent implements OnInit {
   menu = new Array();
   sessionData: any;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private session: SessionService,
-    public servicePermRol: PermisrolService, public servicePermits: PermitsService) {
-    if (localStorage.getItem('first') === 'true') {
-      localStorage.removeItem('first');
+  constructor(
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private session: SessionService,
+    public servicePermRol: PermisrolService,
+    public servicePermits: PermitsService
+  ) {
+    if (localStorage.getItem("first") === "true") {
+      localStorage.removeItem("first");
       window.location.reload();
     }
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-    this.shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+    this.shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some((h) =>
+      h.test(window.location.host)
+    );
   }
 
   ngOnInit() {
@@ -69,44 +75,50 @@ export class HomeComponent implements OnInit {
       );
     } else { */
 
-    this.fillerNav.push(
-      { name: 'Home', route: '../home/homePage', icon: 'home' },
-    );
-    this.permCompany = this.servicePermits.validatePermit('Empresas');
+    this.fillerNav.push({
+      name: "Home",
+      route: "../home/homePage",
+      icon: "home",
+    });
+    this.permCompany = this.servicePermits.validatePermit("Empresas");
     if (this.permCompany) {
-      this.fillerNav.push(
-        { name: 'Empresas', route: '../home/companies', icon: 'business' },
-      );
+      this.fillerNav.push({
+        name: "Empresas",
+        route: "../home/companies",
+        icon: "business",
+      });
     }
-    /* this.permBiosecurity = this.servicePermits.validatePermit('Bioseguridad');
-    if (this.permBiosecurity) {
-      this.fillerNav.push(
-        { name: 'Bioseguridad', route: '../home/biosecurity', icon: 'local_hospital' },
-      );
-    } */
-    this.permProfiles = this.servicePermits.validatePermit('Perfiles');
+    this.permProfiles = this.servicePermits.validatePermit("Perfiles");
     if (this.permProfiles) {
-      this.fillerNav.push(
-        { name: 'Roles', route: '../home/profiles', icon: 'assignment_ind' },
-      );
+      this.fillerNav.push({
+        name: "Roles",
+        route: "../home/profiles",
+        icon: "assignment_ind",
+      });
     }
-    this.permPermissions = this.servicePermits.validatePermit('Permisos');
+    this.permPermissions = this.servicePermits.validatePermit("Permisos");
     if (this.permPermissions) {
-      this.fillerNav.push(
-        { name: 'Permisos', route: '../home/permissions', icon: 'vpn_key' },
-      );
+      this.fillerNav.push({
+        name: "Permisos",
+        route: "../home/permissions",
+        icon: "vpn_key",
+      });
     }
-    this.permFormats = this.servicePermits.validatePermit('Formatos');
+    this.permFormats = this.servicePermits.validatePermit("Formatos");
     if (this.permFormats) {
-      this.fillerNav.push(
-        { name: 'Formatos', route: '../home/formats', icon: 'assignment' },
-      );
+      this.fillerNav.push({
+        name: "Formatos",
+        route: "../home/formats",
+        icon: "assignment",
+      });
     }
-    this.permSections = this.servicePermits.validatePermit('Secciones');
+    this.permSections = this.servicePermits.validatePermit("Secciones");
     if (this.permSections) {
-      this.fillerNav.push(
-        { name: 'Secciones', route: '../home/sections', icon: 'vertical_split' },
-      );
+      this.fillerNav.push({
+        name: "Secciones",
+        route: "../home/sections",
+        icon: "vertical_split",
+      });
     }
     /* this.permOptions = this.servicePermits.validatePermit('Opciones');
     if (this.permOptions) {
@@ -114,11 +126,13 @@ export class HomeComponent implements OnInit {
         { name: 'Andres', route: '../home/options', icon: 'ballot' },
       );
     } */
-    this.permReports = this.servicePermits.validatePermit('Reportes');
+    this.permReports = this.servicePermits.validatePermit("Reportes");
     if (this.permReports) {
-      this.fillerNav.push(
-        { name: 'Reportes', route: '../home/regformats', icon: 'assignment_turned_in' }
-      );
+      this.fillerNav.push({
+        name: "Reportes",
+        route: "../home/regformats",
+        icon: "assignment_turned_in",
+      });
     }
     // }
 
@@ -128,5 +142,4 @@ export class HomeComponent implements OnInit {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
 }

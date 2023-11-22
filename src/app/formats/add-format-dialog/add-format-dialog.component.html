@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Agregar formato</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddFormat="ngForm">
+
+    <!-- Nombre -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="nameFormat" />
+      <mat-error *ngIf="f.nameFormat.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.nameFormat.errors?.maxlength">Debe contener máximo 100 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descFormat"></textarea>
+      <mat-error *ngIf="f.descFormat.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.descFormat.errors?.maxlength">Debe contener máximo 300 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Tipo -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <input matInput type="text" formControlName="typeFormat" />
+      <mat-error *ngIf="f.typeFormat.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.typeFormat.errors?.maxlength">Debe contener máximo 10 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Código -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput type="text" formControlName="codFormat" />
+      <mat-error *ngIf="f.codFormat.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.nameFormat.errors?.maxlength">Debe contener máximo 30 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Fecha de emisión -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Fecha de emisión</mat-label>
+      <input matInput [matDatepicker]="pickerIssue" formControlName="issueDate" />
+      <mat-datepicker-toggle matSuffix [for]="pickerIssue"></mat-datepicker-toggle>
+      <mat-datepicker #pickerIssue></mat-datepicker>
+      <mat-error *ngIf="f.issueDate.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveFormat()" [disabled]="formAddFormat.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

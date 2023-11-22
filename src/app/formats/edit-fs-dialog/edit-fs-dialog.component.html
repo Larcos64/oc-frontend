@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Editar sección</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+
+    <!-- Nombre -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Nombre:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.name_sec }}</mat-grid-tile>
+
+  </mat-grid-list>
+
+  <form [formGroup]="form" #formEditFs="ngForm">
+    <!-- Id. Asignación (Oculto) -->
+    <mat-form-field class="invisible field-full-width">
+      <input matInput placeholder="Id. Asignación" formControlName="idFs" />
+    </mat-form-field>
+
+    <!-- Id. Empresa (Oculto) -->
+    <mat-form-field class="invisible field-full-width">
+      <input matInput placeholder="Id. Formato" formControlName="idFormat" />
+    </mat-form-field>
+
+    <!-- Id. Sección (Oculto) -->
+    <mat-form-field class="invisible field-full-width">
+      <input matInput placeholder="Id. Sección" formControlName="idSec" />
+    </mat-form-field>
+
+    <!-- Adminisrtadora -->
+    <label>Estado:</label>&nbsp;&nbsp;
+    <mat-radio-group formControlName="stateFs">
+      <mat-radio-button type="radio" name="stateFs" [value]="true">Activa</mat-radio-button>
+      &nbsp;&nbsp;
+      <mat-radio-button type="radio" name="stateFs" [value]="false">Inactiva</mat-radio-button>
+    </mat-radio-group>
+
+    <br /><br />
+
+    <!-- Orden -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Orden</mat-label>
+      <input matInput type="number" formControlName="orderFs" />
+      <mat-error *ngIf="f.orderFs.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.orderFs.errors?.max">Debe contener máximo 4 digitos</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="editFs()" [disabled]="!formEditFs.dirty || formEditFs.invalid">
+    Editar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>
