@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     this.permFormats = this.servicePermits.validatePermit("Formatos");
     if (this.permFormats) {
       this.fillerNav.push({
-        name: "Formatos",
+        name: "Encuestas",
         route: "../home/formats",
         icon: "assignment",
       });
