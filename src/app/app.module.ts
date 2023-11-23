@@ -14,11 +14,6 @@ import { CompaniesModule } from "./companies/companies.module";
 import { PermisrolModule } from "./permisrol/permisrol.module";
 import { WorkplacesModule } from "./workplaces/workplaces.module";
 import { VocabularyService } from "../services/vocabulary.service";
-// firebase
-import { AngularFireModule } from "@angular/fire";
-import { AngularFirestoreModule } from "@angular/fire/firestore";
-import { AngularFireStorageModule } from "@angular/fire/storage";
-import { environment } from "src/environments/environment";
 // material
 import { MatModule } from "./shared/mat.module";
 
@@ -41,9 +36,6 @@ import { FormatsModule } from "./formats/formats.module";
     PermisrolModule,
     CompaniesModule,
     WorkplacesModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
     MatModule,
     FormsModule,
     ReactiveFormsModule,
