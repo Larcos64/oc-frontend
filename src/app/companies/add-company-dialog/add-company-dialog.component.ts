@@ -8,7 +8,6 @@ import { AcsCompany } from '../../shared/models/acscompany.model';
 import { snackError, snackOk } from '../../util/snackbar-util';
 import { CompaniesService } from '../services/companies.service';
 import { FileItem } from 'src/app/dynamicforms/models/FileItem';
-import { UploadFileService } from 'src/app/dynamicforms/services/upload-file.service';
 
 @Component({
   selector: 'app-add-company-dialog',
@@ -25,8 +24,7 @@ export class AddCompanyDialogComponent implements OnInit {
   nit: number;
 
   constructor(private router: Router, private fb: FormBuilder, public service: CompaniesService,
-    private snackbar: MatSnackBar, private route: ActivatedRoute, public dialogRef: MatDialogRef<AddCompanyDialogComponent>,
-    private uploadFilesService: UploadFileService) { }
+    private snackbar: MatSnackBar, private route: ActivatedRoute, public dialogRef: MatDialogRef<AddCompanyDialogComponent>) { }
 
   ngOnInit() {
     this.initForm();
@@ -56,14 +54,9 @@ export class AddCompanyDialogComponent implements OnInit {
     if (this.logo) {
 
       this.nit = this.form.get('nitComp').value;
-      // let ext = this.getFileExtension3(this.logo.name);
-      // this.form.controls.logoComp.setValue('/public/uploads/logos/' + this.nit + '.' + ext);
-
-      const logoFile = new FileItem(this.logo);
-      this.uploadFilesService.uploadFileToStorage([logoFile]).then((urlFile: string[]) => {
-        this.form.controls.logoComp.setValue(urlFile[0]);
-        this.saveCompany();
-      })
+      let ext = this.getFileExtension3(this.logo.name);
+      this.form.controls.logoComp.setValue('/public/uploads/logos/' + this.nit + '.' + ext);
+      this.saveCompany();
 
     } else {
       this.saveCompany();

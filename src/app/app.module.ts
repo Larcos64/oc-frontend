@@ -1,34 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule } from './core/core.module';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CoreModule } from "./core/core.module";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { HttpClientModule } from '@angular/common/http';
-import { UsersModule } from './users/users.module';
-import { ProfilesModule } from './profiles/profiles.module';
-import { PermissionsModule } from './permissions/permissions.module';
-import { CompaniesModule } from './companies/companies.module';
-import { PermisrolModule } from './permisrol/permisrol.module';
-import { WorkplacesModule } from './workplaces/workplaces.module';
-import { VocabularyService } from '../services/vocabulary.service';
-// firebase
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from "@angular/fire/storage";
-import { environment } from 'src/environments/environment';
+import { HttpClientModule } from "@angular/common/http";
+import { UsersModule } from "./users/users.module";
+import { ProfilesModule } from "./profiles/profiles.module";
+import { PermissionsModule } from "./permissions/permissions.module";
+import { CompaniesModule } from "./companies/companies.module";
+import { PermisrolModule } from "./permisrol/permisrol.module";
+import { WorkplacesModule } from "./workplaces/workplaces.module";
+import { VocabularyService } from "../services/vocabulary.service";
 // material
-import { MatModule } from './shared/mat.module';
+import { MatModule } from "./shared/mat.module";
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormatsModule } from "./formats/formats.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -37,20 +30,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoreModule,
     FlexLayoutModule,
     UsersModule,
+    FormatsModule,
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,
     CompaniesModule,
     WorkplacesModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireStorageModule,
     MatModule,
     FormsModule,
-    ReactiveFormsModule
-    
+    ReactiveFormsModule,
   ],
   providers: [VocabularyService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
