@@ -56,14 +56,15 @@ export class AddCompanyDialogComponent implements OnInit {
     if (this.logo) {
 
       this.nit = this.form.get('nitComp').value;
-      // let ext = this.getFileExtension3(this.logo.name);
-      // this.form.controls.logoComp.setValue('/public/uploads/logos/' + this.nit + '.' + ext);
+      let ext = this.getFileExtension3(this.logo.name);
+      this.form.controls.logoComp.setValue('/public/uploads/logos/' + this.nit + '.' + ext);
+      this.saveCompany();
 
-      const logoFile = new FileItem(this.logo);
+      /* const logoFile = new FileItem(this.logo);
       this.uploadFilesService.uploadFileToStorage([logoFile]).then((urlFile: string[]) => {
         this.form.controls.logoComp.setValue(urlFile[0]);
         this.saveCompany();
-      })
+      }) */
 
     } else {
       this.saveCompany();
