@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { MatModule } from './shared/mat.module';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SectionsModule } from './sections/sections.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PermisrolModule,
     CompaniesModule,
     WorkplacesModule,
+    SectionsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,

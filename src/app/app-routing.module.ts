@@ -8,6 +8,7 @@ import { permissionsRoutes } from './permissions/permissions.routing';
 import { companiesRoutes } from './companies/companies.routing';
 import { workplacesRoutes } from './workplaces/workplaces.routing';
 import { HomePageComponent } from './core/pages/home-page/home-page.component';
+import { sectionsRoutes } from './sections/sections.routing';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
       ...permissionsRoutes,
       ...companiesRoutes,
       ...workplacesRoutes,
+      ...sectionsRoutes,
       { path: 'homePage', component: HomePageComponent },
       { path: '', redirectTo: 'companies', pathMatch: 'full' }
     ]
