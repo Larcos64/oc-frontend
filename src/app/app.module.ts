@@ -12,7 +12,7 @@ import { ProfilesModule } from "./profiles/profiles.module";
 import { PermissionsModule } from "./permissions/permissions.module";
 import { CompaniesModule } from "./companies/companies.module";
 import { PermisrolModule } from "./permisrol/permisrol.module";
-import { WorkplacesModule } from "./workplaces/workplaces.module";
+import { WorkplacesModule } from "./workarea/workarea.module";
 import { VocabularyService } from "../services/vocabulary.service";
 // material
 import { MatModule } from "./shared/mat.module";
