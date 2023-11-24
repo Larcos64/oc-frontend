@@ -9,6 +9,7 @@ import { AddWorkplaceDialogComponent } from '../add-workarea-dialog/add-workarea
 import { EditWorkplaceDialogComponent } from '../edit-workarea-dialog/edit-workarea-dialog.component';
 import { DelWorkplaceDialogComponent } from '../del-workarea-dialog/del-workarea-dialog.component';
 import { PermitsService } from '../../core/services/permits.service';
+import { CompaniesService } from 'src/app/companies/services/companies.service';
 
 @Component({
   selector: 'app-list-workarea',
@@ -35,14 +36,27 @@ export class ListWorkplacesComponent implements OnInit {
   permEdit = this.servicePermits.validatePermit('Empresas.usuarios.editar');
   permDel = this.servicePermits.validatePermit('Empresas.usuarios.eliminar');
 
-  constructor(private service: WorkplacesService, public dialog: MatDialog,
+  constructor(private service: WorkplacesService, private serviceComp: CompaniesService, public dialog: MatDialog,
     private activateRoute: ActivatedRoute, public servicePermits: PermitsService) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
       this.idComp = params["id_comp"];
     });
+    this.getCompany();
     this.getWorkplaces();
+  }
+
+  getCompany() {
+    this.serviceComp.compById(this.idComp).subscribe(company => {
+      this.dataComp = company;
+      this.nameComp = this.dataComp[0]["nameComp"];
+      this.breadcrumb = [
+        { url: '/home/homePage', name: 'Inicio' },
+        { url: '../../../../home/companies', name: 'Empresas' },
+        { url: '', name: `Sitios de trabajo ${this.nameComp}` },
+      ];
+    });
   }
 
   

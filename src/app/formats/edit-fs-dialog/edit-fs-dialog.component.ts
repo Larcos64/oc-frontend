@@ -33,8 +33,8 @@ export class EditFsDialogComponent implements OnInit {
       idFs: [this.data.id_fs, Validators.required],
       idFormat: [this.data.id_format, Validators.required],
       idSec: [this.data.id_sec, Validators.required],
-      stateFs: [this.data.state_fs, Validators.required],
-      orderFs: [this.data.order_fs, [Validators.required, Validators.max(9999)]],
+      stateFs: [this.data.state_ss, Validators.required],
+      orderFs: [this.data.order_ss, [Validators.required, Validators.max(9999)]],
     });
   }
 
