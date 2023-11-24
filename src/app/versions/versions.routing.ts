@@ -8,7 +8,7 @@ export const versionRoutes: Routes = [
   {
     path: 'versions', component: VersionsComponent, canActivate: [AccessServiceGuard], children: [
       { path: 'id_format/:id_format', component: ListVersionsComponent },
-      { path: 'id_cf/:id_cf', component: ListVersionsFillComponent }
+      { path: 'id_sat/:id_sat', component: ListVersionsFillComponent }
     ]
   }
 

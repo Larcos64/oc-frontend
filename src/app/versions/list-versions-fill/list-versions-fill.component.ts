@@ -43,7 +43,7 @@ export class ListVersionsFillComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
-      this.idCf = params["id_cf"];
+      this.idCf = params["id_sat"];
     });
     this.getCf();
   }

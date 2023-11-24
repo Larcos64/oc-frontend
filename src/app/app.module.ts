@@ -20,8 +20,12 @@ import { MatModule } from "./shared/mat.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FormatsModule } from "./formats/formats.module";
 import { SectionsModule } from "./sections/sections.module";
-// import { CompformatModule } from './compformat/';
+import { CompformatModule } from './compformat/compformat.module';
 import { OptionsModule } from './options/options.module';
+import { QuestionsModule } from './questions/questions.module';
+import { DependenciesModule } from './dependencies/dependencies.module';
+
+import { VersionsModule } from './versions/versions.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,8 +38,12 @@ import { OptionsModule } from './options/options.module';
     FlexLayoutModule,
     UsersModule,
     FormatsModule,
+    QuestionsModule,
     SectionsModule,
+    CompformatModule,
+    VersionsModule,
     OptionsModule,
+    DependenciesModule,
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,
