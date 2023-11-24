@@ -9,6 +9,8 @@ import { companiesRoutes } from "./companies/companies.routing";
 import { workplacesRoutes } from "./workarea/workarea.routing";
 import { HomePageComponent } from "./core/pages/home-page/home-page.component";
 import { formatsRoutes } from "./formats/formats.routing";
+import { sectionsRoutes } from './sections/sections.routing';
+import { optionsRoutes } from './options/options.routing';
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
       ...profilesRoutes,
       ...permissionsRoutes,
       ...formatsRoutes,
+      ...sectionsRoutes,
+      ...optionsRoutes,
       ...companiesRoutes,
       ...workplacesRoutes,
       { path: "homePage", component: HomePageComponent },

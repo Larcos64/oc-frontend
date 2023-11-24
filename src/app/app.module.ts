@@ -19,6 +19,9 @@ import { MatModule } from "./shared/mat.module";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { FormatsModule } from "./formats/formats.module";
+import { SectionsModule } from "./sections/sections.module";
+// import { CompformatModule } from './compformat/';
+import { OptionsModule } from './options/options.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +34,8 @@ import { FormatsModule } from "./formats/formats.module";
     FlexLayoutModule,
     UsersModule,
     FormatsModule,
+    SectionsModule,
+    OptionsModule,
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,

@@ -120,20 +120,20 @@ export class HomeComponent implements OnInit {
         icon: "vertical_split",
       });
     }
-    /* this.permOptions = this.servicePermits.validatePermit('Opciones');
+    this.permOptions = this.servicePermits.validatePermit('Opciones');
     if (this.permOptions) {
       this.fillerNav.push(
-        { name: 'Andres', route: '../home/options', icon: 'ballot' },
+        { name: 'Opciones', route: '../home/options', icon: 'ballot' },
       );
-    } */
-    this.permReports = this.servicePermits.validatePermit("Reportes");
+    }
+    /* this.permReports = this.servicePermits.validatePermit("Reportes");
     if (this.permReports) {
       this.fillerNav.push({
         name: "Reportes",
         route: "../home/regformats",
         icon: "assignment_turned_in",
       });
-    }
+    } */
     // }
 
     this.menu = this.fillerNav;
