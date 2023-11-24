@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Agregar valor de opción</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddOptVal="ngForm">
+
+    <!-- Estado -->
+    <label>Estado:</label>&nbsp;&nbsp;
+    <mat-radio-group formControlName="stateOptValue">
+      <mat-radio-button type="radio" name="stateOptValue" [value]="true">Activa</mat-radio-button>
+      &nbsp;&nbsp;
+      <mat-radio-button type="radio" name="stateOptValue" [value]="false">Inactiva</mat-radio-button>
+      <mat-error *ngIf="f.stateOptValue.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-radio-group>
+
+    <br /><br />
+
+    <!-- Opción -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Opción</mat-label>
+      <input matInput type="text" formControlName="nameOptValue" />
+      <mat-error *ngIf="f.nameOptValue.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.nameOptValue.errors?.maxlength">Debe contener máximo 200 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Código -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput type="text" formControlName="codOptValue" />
+      <mat-error *ngIf="f.codOptValue.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.codOptValue.errors?.maxlength">Debe contener máximo 20 caracteres</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="addOption()" [disabled]="formAddOptVal.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

@@ -15,14 +15,14 @@ export class CompformatService {
   constructor(private http: HttpClient) { }
 
   add(item: ActsCompFormat): Observable<string> {
-    const url = `${environment.urlBase}/compformat/`;
+    const url = `${environment.urlBase}/surveyassignment/`;
     return this.http.post<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   listByIdForm(idFormat: number): Observable<ActsCompFormat[]> {
-    const url = `${environment.urlBase}/compformat/id_form/${idFormat}`;
+    const url = `${environment.urlBase}/surveyassignment/id_form/${idFormat}`;
     return this.http.get<Rspn<ActsCompFormat[]>>(url)
       .pipe(
         map(x => validate<ActsCompFormat[]>(x)
@@ -30,7 +30,7 @@ export class CompformatService {
   }
 
   listByIdComp(idComp: number): Observable<any[]> {
-    const url = `${environment.urlBase}/compformat/id_comp/${idComp}`;
+    const url = `${environment.urlBase}/surveyassignment/id_comp/${idComp}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
@@ -38,7 +38,7 @@ export class CompformatService {
   }
 
   listByIdCompBio(idComp: number): Observable<any[]> {
-    const url = `${environment.urlBase}/compformat/biosec/${idComp}`;
+    const url = `${environment.urlBase}/surveyassignment/biosec/${idComp}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
@@ -46,7 +46,7 @@ export class CompformatService {
   }
 
   cfById(idCf: number): Observable<any[]> {
-    const url = `${environment.urlBase}/compformat/id_cf/${idCf}`;
+    const url = `${environment.urlBase}/surveyassignment/id_sat/${idCf}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
@@ -54,7 +54,7 @@ export class CompformatService {
   }
 
   deleteByIdForm(idForm: number): Observable<string> {
-    const url = `${environment.urlBase}/compformat/id_form/${idForm}`;
+    const url = `${environment.urlBase}/surveyassignment/id_form/${idForm}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );

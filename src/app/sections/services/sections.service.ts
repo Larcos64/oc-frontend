@@ -15,7 +15,7 @@ export class SectionsService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<ActSection[]> {
-    const url = `${environment.urlBase}/section/`;
+    const url = `${environment.urlBase}/allsection/`;
     return this.http.get<Rspn<ActSection[]>>(url)
       .pipe(
         map(x => validate<ActSection[]>(x)
@@ -23,7 +23,7 @@ export class SectionsService {
   }
 
   listNotInForm(idForm: number): Observable<ActSection[]> {
-    const url = `${environment.urlBase}/section/id_form/${idForm}`;
+    const url = `${environment.urlBase}/allsection/id_form/${idForm}`;
     return this.http.get<Rspn<ActSection[]>>(url)
       .pipe(
         map(x => validate<ActSection[]>(x)
@@ -31,7 +31,7 @@ export class SectionsService {
   }
 
   secById(idSec: number): Observable<ActSection[]> {
-    const url = `${environment.urlBase}/section/id_sec/${idSec}`;
+    const url = `${environment.urlBase}/allsection/id_sec/${idSec}`;
     return this.http.get<Rspn<ActSection[]>>(url)
       .pipe(
         map(x => validate<ActSection[]>(x)
@@ -39,21 +39,21 @@ export class SectionsService {
   }
 
   add(item: ActSection): Observable<string> {
-    const url = `${environment.urlBase}/section/`;
+    const url = `${environment.urlBase}/allsection/`;
     return this.http.post<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   edit(item: ActSection): Observable<string> {
-    const url = `${environment.urlBase}/section/`;
+    const url = `${environment.urlBase}/allsection/`;
     return this.http.put<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   delete(id: number): Observable<string> {
-    const url = `${environment.urlBase}/section/${id}`;
+    const url = `${environment.urlBase}/allsection/${id}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );

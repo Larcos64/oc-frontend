@@ -15,7 +15,7 @@ export class FormatsService {
   constructor(private http: HttpClient) { }
 
   list(): Observable<ActFormat[]> {
-    const url = `${environment.urlBase}/format/`;
+    const url = `${environment.urlBase}/survey/`;
     return this.http.get<Rspn<ActFormat[]>>(url)
       .pipe(
         map(x => validate<ActFormat[]>(x)
@@ -23,7 +23,7 @@ export class FormatsService {
   }
 
   formById(idForm: number): Observable<ActFormat[]> {
-    const url = `${environment.urlBase}/format/id_form/${idForm}`;
+    const url = `${environment.urlBase}/survey/id_form/${idForm}`;
     return this.http.get<Rspn<ActFormat[]>>(url)
       .pipe(
         map(x => validate<ActFormat[]>(x)
@@ -31,7 +31,7 @@ export class FormatsService {
   }
 
   formByIdRf(idForm: number): Observable<ActFormat[]> {
-    const url = `${environment.urlBase}/format/id_form_rf/${idForm}`;
+    const url = `${environment.urlBase}/survey/id_form_rf/${idForm}`;
     return this.http.get<Rspn<ActFormat[]>>(url)
       .pipe(
         map(x => validate<ActFormat[]>(x)
@@ -39,21 +39,21 @@ export class FormatsService {
   }
 
   add(item: ActFormat): Observable<string> {
-    const url = `${environment.urlBase}/format/`;
+    const url = `${environment.urlBase}/survey/`;
     return this.http.post<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   edit(item: ActFormat): Observable<string> {
-    const url = `${environment.urlBase}/format/`;
+    const url = `${environment.urlBase}/survey/`;
     return this.http.put<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   delete(id: number): Observable<string> {
-    const url = `${environment.urlBase}/format/${id}`;
+    const url = `${environment.urlBase}/survey/${id}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );
