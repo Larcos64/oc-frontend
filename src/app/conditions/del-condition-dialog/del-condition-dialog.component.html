@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Eliminar condición</h1>
+<mat-dialog-content>
+  <mat-grid-list cols="2" rowHeight="4:1">
+
+    <!-- Condición -->
+    <mat-grid-tile>
+      <div class="text-inside-grid"><b>Condición:</b></div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.typeCond | transtring }}</mat-grid-tile>
+
+    <!-- Mensaje -->
+    <mat-grid-tile>
+      <div class="text-inside-grid">
+        <b>Mensaje:</b>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>{{ data.messageCond }}</mat-grid-tile>
+
+  </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="1" (click)="deleteCondition()">
+    Eliminar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cancelar
+  </button>
+</mat-dialog-actions>

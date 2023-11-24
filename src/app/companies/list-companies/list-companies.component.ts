@@ -80,7 +80,7 @@ export class ListCompaniesComponent implements OnInit {
   }
 
   viewWorkplaces(idComp: number) {
-    this.router.navigate(['home/workplaces/id_comp', idComp]);
+    this.router.navigate(['home/workarea/id_comp', idComp]);
   }
 
   viewFormats(idComp: number) {

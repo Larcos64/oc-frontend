@@ -1,0 +1,66 @@
+<h1 mat-dialog-title>Agregar dependencia</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddDependency="ngForm">
+
+    <!-- Dependencia O -->
+    <!-- <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput placeholder="Dependencia O" formControlName="orDep" required>
+    </mat-form-field>
+    <mat-slide-toggle color="accent" (change)="changeDependency($event)">
+      Dependencia O
+    </mat-slide-toggle>
+
+    <br><br> -->
+
+    <!-- Sección de pregunta -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Sección de pregunta</mat-label>
+      <mat-select formControlName="secQues" (selectionChange)="onSecChange($event)">
+        <mat-option [value]="section.idSection" *ngFor="let section of sections">{{ section.nameSection }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.secQues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Depende de pregunta -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avQues">
+      <mat-label>Depende de pregunta</mat-label>
+      <mat-select formControlName="idQues" (selectionChange)="onQuesChange($event)">
+        <mat-option [value]="question.idQues" *ngFor="let question of questions">{{ question.nameQues }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.idQues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Operador -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOperators">
+      <mat-label>Operador</mat-label>
+      <mat-select formControlName="operatorDep">
+        <mat-option [value]="operator.value" *ngFor="let operator of listOperators">{{ operator.type }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.operatorDep.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOptValues">
+      <mat-label>Valor</mat-label>
+      <mat-select formControlName="optValues">
+        <mat-option [value]="opt.idOptValue" *ngFor="let opt of optvalues">{{ opt.nameOptValue }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.optValues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avValue">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="valueDep" />
+      <mat-icon matSuffix>live_help</mat-icon>
+      <mat-error *ngIf="f.valueDep.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveDependency()" [disabled]="formAddDependency.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>
