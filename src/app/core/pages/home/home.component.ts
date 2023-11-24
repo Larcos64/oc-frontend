@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
 
   // fillerNav = [
   //   { name: 'Empresas', route: '../home/companies', icon: 'business' },
-  //   { name: 'Perfiles', route: '../home/profiles', icon: 'assignment_ind' },
+  //   { name: 'Roles', route: '../home/profiles', icon: 'assignment_ind' },
   //   { name: 'Permisos', route: '../home/permissions', icon: 'vpn_key' },
   //   { name: 'Formatos', route: '../home/formats', icon: 'assignment' },
   //   { name: 'Secciones', route: '../home/sections', icon: 'vertical_split' },
@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
     /* if (this.permAdmin) {
       this.fillerNav.push(
         { name: 'Empresas', route: '../home/companies', icon: 'business' },
-        { name: 'Perfiles', route: '../home/profiles', icon: 'assignment_ind' },
+        { name: 'Roles', route: '../home/profiles', icon: 'assignment_ind' },
         { name: 'Permisos', route: '../home/permissions', icon: 'vpn_key' },
         { name: 'Formatos', route: '../home/formats', icon: 'assignment' },
         { name: 'Secciones', route: '../home/sections', icon: 'vertical_split' },
@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit {
         icon: "business",
       });
     }
-    this.permProfiles = this.servicePermits.validatePermit("Perfiles");
+    this.permProfiles = this.servicePermits.validatePermit("Roles");
     if (this.permProfiles) {
       this.fillerNav.push({
         name: "Roles",
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     this.permFormats = this.servicePermits.validatePermit("Formatos");
     if (this.permFormats) {
       this.fillerNav.push({
-        name: "Formatos",
+        name: "Encuestas",
         route: "../home/formats",
         icon: "assignment",
       });

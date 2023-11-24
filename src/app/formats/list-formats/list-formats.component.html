@@ -1,27 +1,37 @@
 <mat-toolbar>
-
   <mat-toolbar-row class="toolbar-row-title">
-    <h1>Formatos</h1>
+    <h1>Encuestas</h1>
   </mat-toolbar-row>
 
   <mat-toolbar-row class="toolbar-row-breadcrumb">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
-          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
-          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+        <li
+          class="breadcrumb-item"
+          *ngFor="let navlink of breadcrumb; let i = index"
+        >
+          <a *ngIf="navlink.url" routerLink="{{ navlink.url }}" class="link">{{
+            navlink.name
+          }}</a>
+          <mat-icon class="chevron" *ngIf="i != breadcrumb.length - 1"
+            >chevron_right</mat-icon
+          >
           <ng-container *ngIf="!navlink.url">
-            <span class="link">{{navlink.name}}</span>
+            <span class="link">{{ navlink.name }}</span>
           </ng-container>
         </li>
       </ol>
     </nav>
     <span class="spacer"></span>
-    <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+    <button
+      mat-icon-button
+      matTooltip="Refrescar"
+      matTooltipPosition="left"
+      (click)="refresh()"
+    >
       <mat-icon>refresh</mat-icon>
     </button>
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <div class="container mat-elevation-z2">
@@ -29,9 +39,13 @@
     <mat-card-content>
       <div class="form">
         <mat-form-field class="field-full-width" appearance="legacy">
-          <mat-label>Buscar formato</mat-label>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
-            [disabled]="data.length == 0" />
+          <mat-label>Buscar Encuesta</mat-label>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Buscar"
+            [disabled]="data.length == 0"
+          />
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
       </div>
@@ -40,9 +54,7 @@
         <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
           <!-- Código -->
           <ng-container matColumnDef="cod">
-            <mat-header-cell *matHeaderCellDef>
-              Código
-            </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.codFormat }}
             </mat-cell>
@@ -50,9 +62,7 @@
 
           <!-- Nombre -->
           <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef>
-              Nombre
-            </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
             <mat-cell *matCellDef="let element">
               {{ element.nameFormat }}
             </mat-cell>
@@ -72,41 +82,65 @@
               Fecha de emisión
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.issueDate | date: "dd/MM/yyyy" }}
+              {{ element.issueDate | date : "dd/MM/yyyy" }}
             </mat-cell>
           </ng-container>
 
           <!-- Actions -->
           <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef>
-              Acciones
-            </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
 
             <mat-cell *matCellDef="let element; let i = index">
-
               <!-- Editar aginaciones de secciones -->
-              <button mat-icon-button color="primary" (click)="startEditSec(i, element.idFormat, element.nameFormat)"
-              *ngIf="permAssignSections">
-                <mat-icon matTooltip="Asignar Secciones" matTooltipPosition="right">
-                  vertical_split</mat-icon>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="startEditSec(i, element.idFormat, element.nameFormat)"
+                *ngIf="permAssignSections"
+              >
+                <mat-icon
+                  matTooltip="Asignar Secciones"
+                  matTooltipPosition="right"
+                >
+                  vertical_split</mat-icon
+                >
               </button>
 
               <!-- Editar aginaciones a empresas -->
-              <button mat-icon-button color="primary" (click)="startEditComp(i, element.idFormat, element.nameFormat)"
-              *ngIf="permAssignToCompanies">
-                <mat-icon matTooltip="Asignar a Empresas" matTooltipPosition="right">
-                  assignment_turned_in</mat-icon>
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="startEditComp(i, element.idFormat, element.nameFormat)"
+                *ngIf="permAssignToCompanies"
+              >
+                <mat-icon
+                  matTooltip="Asignar a Empresas"
+                  matTooltipPosition="right"
+                >
+                  assignment_turned_in</mat-icon
+                >
               </button>
 
               <!-- Crear versiones del formato -->
-              <button mat-icon-button color="primary" (click)="goToVersions(element)" *ngIf="permFormatVersions">
-                <mat-icon matTooltip="Versiones del formato" matTooltipPosition="right">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="goToVersions(element)"
+                *ngIf="permFormatVersions"
+              >
+                <mat-icon
+                  matTooltip="Versiones del formato"
+                  matTooltipPosition="right"
+                >
                   bookmarks
                 </mat-icon>
               </button>
 
               <!-- Editar -->
-              <button mat-icon-button color="primary" (click)="
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="
                   startEdit(
                     i,
                     element.idFormat,
@@ -118,12 +152,18 @@
                     element.issueDate
                   )
                 "
-                *ngIf="permEdit">
-                <mat-icon matTooltip="Editar" matTooltipPosition="right">edit</mat-icon>
+                *ngIf="permEdit"
+              >
+                <mat-icon matTooltip="Editar" matTooltipPosition="right"
+                  >edit</mat-icon
+                >
               </button>
 
               <!-- Eliminar -->
-              <button mat-icon-button color="warn" (click)="
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="
                   startDelete(
                     i,
                     element.idFormat,
@@ -132,8 +172,11 @@
                     element.codFormat
                   )
                 "
-                *ngIf="permDel">
-                <mat-icon matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+                *ngIf="permDel"
+              >
+                <mat-icon matTooltip="Eliminar" matTooltipPosition="right"
+                  >delete</mat-icon
+                >
               </button>
             </mat-cell>
           </ng-container>
@@ -142,7 +185,13 @@
           <mat-row *matRowDef="let row; columns: columnsFormat"></mat-row>
         </mat-table>
 
-        <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        <mat-paginator
+          [length]="6"
+          [pageIndex]="0"
+          [pageSize]="5"
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+        >
         </mat-paginator>
       </div>
     </mat-card-content>

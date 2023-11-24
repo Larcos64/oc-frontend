@@ -9,14 +9,14 @@ import { snackError, snackOk } from '../../util/snackbar-util';
 import { WorkplacesService } from '../services/workplaces.service';
 
 @Component({
-  selector: 'app-edit-workplace-dialog',
-  templateUrl: './edit-workplace-dialog.component.html',
-  styleUrls: ['./edit-workplace-dialog.component.scss']
+  selector: 'app-edit-workarea-dialog',
+  templateUrl: './edit-workarea-dialog.component.html',
+  styleUrls: ['./edit-workarea-dialog.component.scss']
 })
 export class EditWorkplaceDialogComponent implements OnInit {
 
   form: FormGroup;
-  workplace = new AcsWorkplace();
+  workarea = new AcsWorkplace();
   loading = false;
 
   constructor(private router: Router, private fb: FormBuilder, public dialogRef: MatDialogRef<EditWorkplaceDialogComponent>,
@@ -31,11 +31,7 @@ export class EditWorkplaceDialogComponent implements OnInit {
     this.form = this.fb.group({
       idWorkplace: [this.data["idWorkplace"], Validators.required],
       idComp: [this.data["idComp"], Validators.required],
-      nameWorkplace: [this.data["nameWorkplace"], Validators.required],
-      addressWorkplace: [this.data["addressWorkplace"]],
-      phoneWorkplace: [this.data["phoneWorkplace"], Validators.max(99999999999999)],
-      fixed: [this.data["fixed"], Validators.required],
-      riskLvlWorkplace: [this.data["riskLvlWorkplace"].toString(), Validators.required]
+      nameWorkplace: [this.data["nameWorkplace"], Validators.required]
     });
   }
 
@@ -43,15 +39,15 @@ export class EditWorkplaceDialogComponent implements OnInit {
   get f() { return this.form.controls; }
 
   editWorkplace() {
-    this.workplace = new AcsWorkplace(this.form.value);
-    (this.service.edit(this.workplace)).pipe(
+    this.workarea = new AcsWorkplace(this.form.value);
+    (this.service.edit(this.workarea)).pipe(
       finalize(() => this.loading = false)
     ).subscribe(() => this.editOk(), (err) => snackError(this.snackbar, err));
   }
 
   editOk() {
     snackOk(this.snackbar, 'Sitio de trabajo actualizado');
-    this.router.navigate([`home/workplaces/id_comp/${this.data["idComp"]}`], { relativeTo: this.route });
+    this.router.navigate([`home/workarea/id_comp/${this.data["idComp"]}`], { relativeTo: this.route });
     this.dialogRef.close();
   }
 
