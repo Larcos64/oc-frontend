@@ -2,21 +2,21 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { MAT_DIALOG_DATA, MatDialogRef } from '../../../../node_modules/@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { finalize } from 'rxjs/operators';
 import { AcsWorkplace } from '../../shared/models/acsworkpace.model';
 import { snackError, snackOk } from '../../util/snackbar-util';
 import { WorkplacesService } from '../services/workplaces.service';
 
 @Component({
-  selector: 'app-add-workplace-dialog',
-  templateUrl: './add-workplace-dialog.component.html',
-  styleUrls: ['./add-workplace-dialog.component.scss']
+  selector: 'app-add-workarea-dialog',
+  templateUrl: './add-workarea-dialog.component.html',
+  styleUrls: ['./add-workarea-dialog.component.scss']
 })
 export class AddWorkplaceDialogComponent implements OnInit {
 
   form: FormGroup;
-  workplace = new AcsWorkplace();
+  workarea = new AcsWorkplace();
   loading = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private fb: FormBuilder, public service: WorkplacesService,
@@ -29,11 +29,7 @@ export class AddWorkplaceDialogComponent implements OnInit {
   initForm() {
     this.form = this.fb.group({
       idComp: [this.data["idComp"], Validators.required],
-      nameWorkplace: ['', Validators.required],
-      addressWorkplace: [''],
-      phoneWorkplace: ['', Validators.max(99999999999999)],
-      fixed: ['', Validators.required],
-      riskLvlWorkplace: ['', Validators.required]
+      nameWorkplace: ['', Validators.required]
     });
   }
 
@@ -41,16 +37,16 @@ export class AddWorkplaceDialogComponent implements OnInit {
   get f() { return this.form.controls; }
 
   saveWorkplace() {
-    this.workplace = new AcsWorkplace(this.form.value);
+    this.workarea = new AcsWorkplace(this.form.value);
     this.loading = true;
-    (this.service.add(this.workplace)).pipe(
+    (this.service.add(this.workarea)).pipe(
       finalize(() => this.loading = false)
     ).subscribe(() => this.addOk(), (err) => snackError(this.snackbar, err));
   }
 
   addOk() {
     snackOk(this.snackbar, 'Sitio de trabajo registrado');
-    this.router.navigate([`home/workplaces/id_comp/${this.data["idComp"]}`], { relativeTo: this.route });
+    this.router.navigate([`home/workarea/id_comp/${this.data["idComp"]}`], { relativeTo: this.route });
     this.dialogRef.close();
   }
 

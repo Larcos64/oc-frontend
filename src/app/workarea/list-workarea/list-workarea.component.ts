@@ -5,15 +5,15 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AcsWorkplace } from '../../shared/models/acsworkpace.model';
 import { WorkplacesService } from '../services/workplaces.service';
-import { AddWorkplaceDialogComponent } from '../add-workplace-dialog/add-workplace-dialog.component';
-import { EditWorkplaceDialogComponent } from '../edit-workplace-dialog/edit-workplace-dialog.component';
-import { DelWorkplaceDialogComponent } from '../del-workplace-dialog/del-workplace-dialog.component';
+import { AddWorkplaceDialogComponent } from '../add-workarea-dialog/add-workarea-dialog.component';
+import { EditWorkplaceDialogComponent } from '../edit-workarea-dialog/edit-workarea-dialog.component';
+import { DelWorkplaceDialogComponent } from '../del-workarea-dialog/del-workarea-dialog.component';
 import { PermitsService } from '../../core/services/permits.service';
 
 @Component({
-  selector: 'app-list-workplaces',
-  templateUrl: './list-workplaces.component.html',
-  styleUrls: ['./list-workplaces.component.scss']
+  selector: 'app-list-workarea',
+  templateUrl: './list-workarea.component.html',
+  styleUrls: ['./list-workarea.component.scss']
 })
 export class ListWorkplacesComponent implements OnInit {
 
