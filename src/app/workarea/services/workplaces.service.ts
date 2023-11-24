@@ -15,7 +15,7 @@ export class WorkplacesService {
   constructor(private http: HttpClient) { }
 
   listByIdComp(idComp: number): Observable<AcsWorkplace[]> {
-    const url = `${environment.urlBase}/workplace/id_comp/${idComp}`;
+    const url = `${environment.urlBase}/workarea/id_comp/${idComp}`;
     return this.http.get<Rspn<AcsWorkplace[]>>(url)
       .pipe(
         map(x => validate<AcsWorkplace[]>(x)
@@ -23,21 +23,21 @@ export class WorkplacesService {
   }
 
   add(item: AcsWorkplace): Observable<string> {
-    const url = `${environment.urlBase}/workplace/`;
+    const url = `${environment.urlBase}/workarea/`;
     return this.http.post<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   edit(item: AcsWorkplace): Observable<string> {
-    const url = `${environment.urlBase}/workplace/`;
+    const url = `${environment.urlBase}/workarea/`;
     return this.http.put<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   delete(id: number): Observable<string> {
-    const url = `${environment.urlBase}/workplace/${id}`;
+    const url = `${environment.urlBase}/workarea/${id}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );

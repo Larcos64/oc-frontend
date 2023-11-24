@@ -7,9 +7,9 @@ import { snackError, snackOk } from '../../util/snackbar-util';
 import { WorkplacesService } from '../services/workplaces.service';
 
 @Component({
-  selector: 'app-del-workplace-dialog',
-  templateUrl: './del-workplace-dialog.component.html',
-  styleUrls: ['./del-workplace-dialog.component.scss']
+  selector: 'app-del-workarea-dialog',
+  templateUrl: './del-workarea-dialog.component.html',
+  styleUrls: ['./del-workarea-dialog.component.scss']
 })
 export class DelWorkplaceDialogComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class DelWorkplaceDialogComponent implements OnInit {
 
   deleteOk() {
     snackOk(this.snackbar, 'Sitio de trabajo eliminado');
-    this.router.navigate([`home/workplaces/id_comp/${this.data.idComp}`], { relativeTo: this.route });
+    this.router.navigate([`home/workarea/id_comp/${this.data.idComp}`], { relativeTo: this.route });
     this.dialogRef.close();
   }
 
