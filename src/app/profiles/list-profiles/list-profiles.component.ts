@@ -29,7 +29,7 @@ export class ListProfilesComponent implements OnInit {
   editPermisDialogRef: MatDialogRef<EditPermissionsDialogComponent>;
   index: number;
 
-  permEditPerms = this.servicePermits.validatePermit('Perfiles.editarPermisos');
+  permEditPerms = this.servicePermits.validatePermit('Roles.editarPermisos');
   permCreate = this.servicePermits.validatePermit('Permisos.crear');
   permEdit = this.servicePermits.validatePermit('Permisos.editar');
   permDel = this.servicePermits.validatePermit('Permisos.eliminar');
@@ -40,7 +40,7 @@ export class ListProfilesComponent implements OnInit {
     this.getProfiles();
     this.breadcrumb = [
       { url: '/home/homePage', name: 'Inicio' },
-      { url: '', name: 'Perfiles' }
+      { url: '', name: 'Roles' }
     ];
   }
 

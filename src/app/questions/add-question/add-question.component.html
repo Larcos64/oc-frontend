@@ -1,0 +1,204 @@
+<mat-toolbar>
+  <span>Agregar pregunta</span>
+</mat-toolbar>
+
+<div class="mat-elevation-z1">
+  <mat-card>
+    <mat-card-content>
+
+      <!--<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+         {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+      </button>-->
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [stepControl]="questionFormGroup">
+          <form [formGroup]="questionFormGroup" #formAddQuestion="ngForm">
+            <ng-template matStepLabel>Información de pregunta</ng-template>
+
+            <!-- Id. Sección (Oculto) -->
+            <mat-form-field class="invisible field-full-width" appearance="outline">
+              <input matInput type="number" placeholder="Id. Sección" formControlName="idSec" required>
+            </mat-form-field>
+
+            <!-- Obligatoria -->
+            <!-- <label>Obligatoria:</label>&nbsp;&nbsp; -->
+            <mat-form-field class="invisible field-full-width" appearance="outline">
+              <input matInput placeholder="Id. Sección" formControlName="mandatoryQues" required>
+            </mat-form-field>
+            <mat-slide-toggle color="accent" (change)="changeMandatory($event)">
+              Obligatoria
+            </mat-slide-toggle>
+            <!-- <mat-radio-group formControlName="mandatoryQues">
+              <mat-radio-button type="radio" name="mandatoryQues" [value]="true">Si</mat-radio-button>
+              &nbsp;&nbsp;
+              <mat-radio-button type="radio" name="mandatoryQues" [value]="false">No</mat-radio-button>
+              <mat-error *ngIf="qfg.mandatoryQues.errors?.required">Debe diligenciar este campo</mat-error>
+            </mat-radio-group> -->
+
+            <br><br>
+
+            <!-- Pregunta -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Pregunta</mat-label>
+              <input matInput type="text" formControlName="nameQues" />
+              <mat-icon matSuffix color="primary">live_help</mat-icon>
+              <mat-error *ngIf="qfg.nameQues.errors?.required">Debe diligenciar este campo</mat-error>
+              <mat-error *ngIf="qfg.nameQues.errors?.maxlength">Debe contener máximo 300 caracteres</mat-error>
+            </mat-form-field>
+
+            <!-- item Value -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Valor del item</mat-label>
+              <input matInput type="text" formControlName="itemValue" />
+              <!-- <mat-icon matSuffix>info</mat-icon> -->
+              <mat-error *ngIf="f.itemValue.errors?.required">Debe diligenciar este campo</mat-error>
+            </mat-form-field>
+
+            <!-- Descripción -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="descQues"></textarea>
+              <mat-error *ngIf="qfg.descQues.errors?.required">Debe diligenciar este campo</mat-error>
+              <mat-error *ngIf="qfg.descQues.errors?.maxlength">Debe contener máximo 500 caracteres</mat-error>
+            </mat-form-field>
+
+            <!-- Type -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Tipo</mat-label>
+              <span *ngIf="select.value" matPrefix style="margin-right: 8px;">
+                <mat-icon>{{select.value}}</mat-icon>
+              </span>
+              <!-- <mat-select-trigger>
+                <mat-icon>{{ getSelectedValue() }}</mat-icon>
+              </mat-select-trigger> -->
+
+              <mat-select #select formControlName="typeQues" (selectionChange)="onTypeChange($event)">
+                <mat-option [value]="type.value" *ngFor="let type of listTypes">
+                  <!-- <mat-icon matSuffix>{{ type.icon }}</mat-icon> -->
+                  <!-- <mat-icon svgIcons="dashboard"></mat-icon> -->
+                  {{ type.type }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="qfg.typeQues.errors?.required">Debe diligenciar este campo</mat-error>
+            </mat-form-field>
+
+            <!-- Información -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Información</mat-label>
+              <input matInput type="text" formControlName="infoQues" />
+              <mat-icon matSuffix>info</mat-icon>
+              <mat-error *ngIf="qfg.infoQues.errors?.required">Debe diligenciar este campo</mat-error>
+            </mat-form-field>
+
+            <br><br>
+
+            <div>
+              <button mat-button (click)="saveQuestion()" [disabled]="formAddQuestion.invalid" *ngIf="!avOptions">
+                Agregar
+              </button>
+              <button mat-button matStepperNext *ngIf="avOptions">Siguiente</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="optionFormGroup" *ngIf="avOptions">
+          <form [formGroup]="optionFormGroup" #formAddOption="ngForm">
+            <ng-template matStepLabel>Opciones de pregunta</ng-template>
+            <!-- Nombre -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Nombre</mat-label>
+              <input matInput type="text" formControlName="nameOption" />
+              <mat-error *ngIf="ofg.nameOption.errors?.required">Debe diligenciar este campo</mat-error>
+              <mat-error *ngIf="ofg.nameOption.errors?.maxlength">Debe contener máximo 200 caracteres</mat-error>
+            </mat-form-field>
+
+            <!-- Descripción -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Descripción</mat-label>
+              <textarea matInput formControlName="descOption"></textarea>
+              <mat-error *ngIf="ofg.descOption.errors?.required">Debe diligenciar este campo</mat-error>
+              <mat-error *ngIf="ofg.descOption.errors?.maxlength">Debe contener máximo 300 caracteres</mat-error>
+            </mat-form-field>
+
+            <!-- Código -->
+            <mat-form-field class="field-full-width" appearance="outline">
+              <mat-label>Código</mat-label>
+              <input matInput type="text" formControlName="codOption" />
+              <mat-error *ngIf="ofg.codOption.errors?.required">Debe diligenciar este campo</mat-error>
+              <mat-error *ngIf="ofg.codOption.errors?.maxlength">Debe contener máximo 30 caracteres</mat-error>
+            </mat-form-field>
+
+            <br>
+
+            <button mat-raised-button (click)="startAddOpt()">Añadir Opción</button>
+
+            <br><br>
+
+            <div class="example-container mat-elevation-z8">
+              <mat-table [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <!-- <ng-container matColumnDef="index">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element; let i = index"> {{ i }} </td>
+                </ng-container> -->
+
+                <!-- Nombre -->
+                <ng-container matColumnDef="option">
+                  <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.nameOptValue}} </mat-cell>
+                </ng-container>
+
+                <!-- Código -->
+                <ng-container matColumnDef="code">
+                  <mat-header-cell *matHeaderCellDef> Código </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.codOptValue}} </mat-cell>
+                </ng-container>
+
+                <!-- Estado -->
+                <ng-container matColumnDef="state">
+                  <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{ element.stateOptValue === true ? "Activa" : "Inactiva" }}
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Actions -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+                  <mat-cell *matCellDef="let element; let i = index">
+                    <!-- Retirar opción -->
+                    <button mat-icon-button color="warn" (click)="deleteOption(i)">
+                      <mat-icon matTooltip="Retirar" matTooltipPosition="right">delete</mat-icon>
+                    </button>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="columnsOption; sticky: true"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: columnsOption;"></mat-row>
+              </mat-table>
+            </div>
+
+            <br><br>
+
+            <div>
+              <button mat-button matStepperPrevious>Anterior</button>
+              <button mat-button (click)="saveOption()" [disabled]="formAddOption.invalid">
+                Agregar
+              </button>
+
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step> -->
+      </mat-horizontal-stepper>
+
+    </mat-card-content>
+  </mat-card>
+</div>

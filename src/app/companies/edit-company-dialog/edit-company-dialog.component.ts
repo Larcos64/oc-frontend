@@ -9,7 +9,6 @@ import { snackError, snackOk } from '../../util/snackbar-util';
 import { CompaniesService } from '../services/companies.service';
 import { environment } from 'src/environments/environment';
 import { FileItem } from 'src/app/dynamicforms/models/FileItem';
-import { UploadFileService } from 'src/app/dynamicforms/services/upload-file.service';
 
 @Component({
   selector: 'app-edit-company-dialog',
@@ -28,12 +27,14 @@ export class EditCompanyDialogComponent implements OnInit {
 
   constructor(private router: Router, private fb: FormBuilder, public dialogRef: MatDialogRef<EditCompanyDialogComponent>,
     private snackbar: MatSnackBar, private route: ActivatedRoute, @Inject(MAT_DIALOG_DATA) public data: any,
-    public service: CompaniesService, private uploadFilesService: UploadFileService) { }
+    public service: CompaniesService) { }
 
   ngOnInit() {
 
     this.initForm();
-    this.srcLogo = this.data["logoComp"];
+    this.srcLogo = this.data.logoComp;
+    // const baseUrl = "http://localhost:8080";
+    // this.srcLogo = baseUrl + this.data.logoComp;
   }
 
   initForm() {
@@ -62,39 +63,11 @@ export class EditCompanyDialogComponent implements OnInit {
 
       this.nit = this.form.get('nitComp').value;
       const oldLogo = this.form.get('logoComp').value ? this.form.get('logoComp').value : '';
-
-      if (oldLogo) {
-        this.uploadWithLogo(oldLogo);
-      } else {
-        this.saveEdit();
-      }
-
+      this.saveEdit();
     } else {
       this.saveEdit();
     }
 
-  }
-
-  uploadWithLogo(oldlogo: string) {
-
-    const logoFile = new FileItem(this.logo);
-
-    this.uploadFilesService.deleteFile(oldlogo).then(() => {
-      this.saveLogoAndInfo(logoFile);
-    })
-      .catch(err => {
-        console.log("error, ", err.code)
-        if (err.code === 'storage/object-not-found') {
-          this.saveLogoAndInfo(logoFile);
-        }
-      })
-  }
-
-  saveLogoAndInfo(logo: FileItem) {
-    this.uploadFilesService.uploadFileToStorage([logo]).then((urlFile: string[]) => {
-      this.form.controls.logoComp.setValue(urlFile[0]);
-      this.saveEdit();
-    })
   }
 
   saveEdit() {
@@ -147,10 +120,5 @@ export class EditCompanyDialogComponent implements OnInit {
       reader.onload = e => this.logoSelected = reader.result;
       reader.readAsDataURL(file);
     }
-  }
-
-  dow(){
-    this.uploadFilesService.dowloadFile('https://firebasestorage.googleapis.com/v0/b/anovawebapp.appspot.com/o/files%2F368750-PBCLHI-746.jpg?alt=media&token=1cfd31de-13f1-4cf1-a9f5-79d3dff4b78d')
-    .then( base64 => console.log(base64) )
   }
 }

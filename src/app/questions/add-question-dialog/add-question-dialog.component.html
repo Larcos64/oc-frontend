@@ -1,0 +1,94 @@
+<h1 mat-dialog-title>Agregar pregunta</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddQuestion="ngForm">
+
+    <!-- Obligatoria -->
+    <mat-form-field class="invisible field-full-width" appearance="outline">
+      <input matInput placeholder="Id. Sección" formControlName="mandatoryQues" required>
+    </mat-form-field>
+    <mat-slide-toggle color="accent" (change)="changeMandatory($event)">
+      Obligatoria
+    </mat-slide-toggle>
+
+    <br><br>
+
+    <!-- Pregunta -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Pregunta</mat-label>
+      <input matInput type="text" formControlName="nameQues" />
+      <mat-icon matSuffix>live_help</mat-icon>
+      <mat-error *ngIf="f.nameQues.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.nameQues.errors?.maxlength">Debe contener máximo 300 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- item Value -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Valor del item</mat-label>
+      <input matInput type="text" formControlName="itemValue" />
+      <!-- <mat-icon matSuffix>info</mat-icon> -->
+      <!-- <mat-error *ngIf="f.itemValue.errors?.required">Debe diligenciar este campo</mat-error> -->
+    </mat-form-field>
+
+    <!-- Descripción -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descQues"></textarea>
+      <mat-error *ngIf="f.descQues.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.descQues.errors?.maxlength">Debe contener máximo 500 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Type -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <span *ngIf="select.value" matPrefix style="margin-right: 8px;">
+        <mat-icon>{{select.value}}</mat-icon>
+      </span>
+      <!-- <mat-select-trigger>
+        <mat-icon>{{ getSelectedValue() }}</mat-icon>
+      </mat-select-trigger> -->
+
+      <mat-select #select formControlName="typeQues" (selectionChange)="onTypeChange($event)">
+        <mat-option [value]="type.value" *ngFor="let type of listTypes">
+          <!-- <mat-icon matSuffix>{{ type.icon }}</mat-icon> -->
+          <!-- <mat-icon svgIcons="dashboard"></mat-icon> -->
+          {{ type.type }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.typeQues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Opción -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOptions">
+      <mat-label>Opción</mat-label>
+      <mat-select formControlName="idOpt">
+        <mat-option [value]="opt.idOption" *ngFor="let opt of options">{{
+          opt.nameOption
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.idOpt.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Información -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Información</mat-label>
+      <input matInput type="text" formControlName="infoQues" />
+      <mat-icon matSuffix>info</mat-icon>
+      <mat-error *ngIf="f.infoQues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!--orden de la pregunta -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Orden de la pregunta</mat-label>
+      <input matInput type="number" formControlName="orderQues" />
+      <!-- <mat-icon matSuffix>info</mat-icon> -->
+      <mat-error *ngIf="f.orderQues.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveQuestion()" [disabled]="formAddQuestion.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

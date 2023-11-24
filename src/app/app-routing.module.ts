@@ -6,7 +6,7 @@ import { usersRoutes } from "./users/users.routing";
 import { profilesRoutes } from "./profiles/profiles.routing";
 import { permissionsRoutes } from "./permissions/permissions.routing";
 import { companiesRoutes } from "./companies/companies.routing";
-import { workplacesRoutes } from "./workplaces/workplaces.routing";
+import { workplacesRoutes } from "./workarea/workarea.routing";
 import { HomePageComponent } from "./core/pages/home-page/home-page.component";
 import { formatsRoutes } from "./formats/formats.routing";
 const routes: Routes = [

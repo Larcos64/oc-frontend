@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Editar sitio de trabajo</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddWorkplace="ngForm">
+
+    <br>
+
+    <!-- Nombre -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="nameWorkplace" />
+      <mat-error *ngIf="f.nameWorkplace.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="editWorkplace()" [disabled]="formAddWorkplace.invalid">
+    Editar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>
