@@ -1,0 +1,94 @@
+<h1 mat-dialog-title>
+  Secciones de la versión {{ data.version.codVersion }} - {{data.version.version}}
+</h1>
+<mat-dialog-content>
+  <div class="container mat-elevation-z2">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <mat-form-field class="field-full-width" appearance="outline">
+        <mat-label>Secciones que no están en esta versión</mat-label>
+        <mat-select placeholder="Secciones" [(ngModel)]="sectionSelects" name="sectionSelects" [disabled]="sections.length == 0" multiple>
+          <input placeholder="Filtrar por nombre de sección" matInput type="text"
+            (keyup)="applyFilterSection($event.target.value)">
+          <mat-option *ngFor="let sec of sections" [value]="sec">{{sec.nameSection}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button style="margin-left: 10px;" mat-raised-button color="accent" (click)="addSections()"
+        [disabled]="sectionSelects.length == 0">
+        Agregar secciones a la versión
+      </button>
+    </div>
+
+    <div class="form">
+      <mat-form-field class="field-full-width" appearance="legacy">
+        <mat-label>Buscar sección</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+          [disabled]="dataFs.length == 0" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+        <!-- Nombre -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>
+            Nombre
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.name_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Descripción -->
+        <ng-container matColumnDef="desc">
+          <mat-header-cell *matHeaderCellDef>
+            Descripción
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.desc_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Tipo -->
+        <ng-container matColumnDef="type">
+          <mat-header-cell *matHeaderCellDef>
+            Tipo
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.type_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            Acciones
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let element; let i = index">
+            <!-- Eliminar -->
+            <button mat-icon-button color="warn" (click)="startDelete(i,element)">
+              <mat-icon matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsFs"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsFs"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- <button mat-raised-button color="accent" (click)="startAdd(data.idFormat)">
+    Asignar Nueva
+  </button> -->
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cerrar
+  </button>
+</mat-dialog-actions>

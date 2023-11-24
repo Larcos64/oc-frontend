@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>{{edit ? 'Actualizar' : 'Agregar'}} versión</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddVersion="ngForm">
+
+    <!-- Estado de la versión -->
+    <label>Estado</label>&nbsp;&nbsp;
+    <mat-radio-group #stateV formControlName="stateVersion">
+      <mat-radio-button type="radio" [value]="true">Activa</mat-radio-button>
+      &nbsp;&nbsp;
+      <mat-radio-button type="radio" [value]="false">Inactiva</mat-radio-button>
+    </mat-radio-group>
+
+    <br><br>
+
+    <!-- Código -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Código</mat-label>
+      <input matInput type="text" formControlName="codVersion" />
+      <mat-error *ngIf="f.codVersion.errors?.required">Debe diligenciar este campo</mat-error>
+      <mat-error *ngIf="f.codVersion.errors?.maxlength">Debe contener máximo 100 caracteres</mat-error>
+    </mat-form-field>
+
+    <!-- Fecha de creación -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Fecha de creación</mat-label>
+      <input matInput [matDatepicker]="pickerCreated" formControlName="dateCreated" />
+      <mat-datepicker-toggle matSuffix [for]="pickerCreated"></mat-datepicker-toggle>
+      <mat-datepicker #pickerCreated></mat-datepicker>
+      <mat-error *ngIf="f.dateCreated.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Versión -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Versión</mat-label>
+      <input matInput type="number" formControlName="version" />
+      <mat-error *ngIf="f.version.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveVersion()" [disabled]="formAddVersion.invalid">
+    {{edit ? 'Actualizar' : 'Agregar'}}
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>

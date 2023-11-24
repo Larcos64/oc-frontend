@@ -1,0 +1,93 @@
+<h1 mat-dialog-title>
+  Preguntas de la versión {{ data.version.codVersion }} - {{data.version.version}}
+</h1>
+<mat-dialog-content>
+  <div class="container mat-elevation-z2">
+    <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <mat-form-field fxFlex="0 0 100%" fxFlex.gt-sm="0 0 calc(50% - 16px)" appearance="outline">
+        <mat-label>Secciones</mat-label>
+        <mat-select placeholder="Secciones" [(ngModel)]="sectionSelect" name="section"
+          (selectionChange)="searchQuestions($event)">
+          <input placeholder="Filtrar por nombre de sección" matInput type="text"
+            (keyup)="applyFilterSection($event.target.value, 'S')">
+          <mat-option *ngFor="let sec of sections" [value]="sec">{{sec.name_sec}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="0 0 100%" fxFlex.gt-sm="0 0 calc(50% - 16px)" appearance="outline">
+        <mat-label>Preguntas que no están en esta versión</mat-label>
+        <mat-select placeholder="Secciones" [(ngModel)]="questionSelects" name="questionSelects" multiple>
+          <input placeholder="Filtrar por nombre de pregunta" matInput type="text"
+            (keyup)="applyFilterSection($event.target.value, 'Q')">
+          <mat-option *ngFor="let ques of questions" [value]="ques">{{ques.nameQues}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="addQuestions()" [disabled]="questionSelects.length == 0">
+        Agregar preguntas a la versión
+      </button>
+    </div>
+
+
+    <div class="form">
+      <mat-form-field class="field-full-width" appearance="legacy">
+        <mat-label>Buscar pregunta</mat-label>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+          [disabled]="dataFs.length == 0" />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+        <!-- Nombre -->
+        <ng-container matColumnDef="nameSec">
+          <mat-header-cell *matHeaderCellDef>
+            Nombre de la sección
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.name_sec }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Descripción -->
+        <ng-container matColumnDef="nameQues">
+          <mat-header-cell *matHeaderCellDef>
+            Nombre de la pregunta
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            {{ element.name_ques }}
+          </mat-cell>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            Acciones
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let element; let i = index">
+            <!-- Eliminar -->
+            <button mat-icon-button color="warn" (click)="startDelete(i,element)">
+              <mat-icon matTooltip="Eliminar" matTooltipPosition="right">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnsFs"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnsFs"></mat-row>
+      </mat-table>
+
+      <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <!-- <button mat-raised-button color="accent" (click)="startAdd(data.idFormat)">
+    Asignar Nueva
+  </button> -->
+  <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
+    Cerrar
+  </button>
+</mat-dialog-actions>
