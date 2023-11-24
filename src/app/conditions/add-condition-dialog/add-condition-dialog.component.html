@@ -1,0 +1,77 @@
+<h1 mat-dialog-title>Agregar condición</h1>
+<mat-dialog-content>
+  <form [formGroup]="form" #formAddCondition="ngForm">
+
+    <!-- Tipo -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <mat-select #select formControlName="typeCond" (selectionChange)="onTypeChange($event)">
+        <mat-option [value]="type.value" *ngFor="let type of listTypes">
+          {{ type.cond }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.typeCond.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Operador -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOperators">
+      <mat-label>Operador</mat-label>
+
+      <mat-select #select formControlName="operatorCond" (selectionChange)="onOperChange($event)">
+        <mat-option [value]="type.value" *ngFor="let type of listOperators">
+          {{ type.type }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.operatorCond.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avValue">
+      <mat-label>Valor</mat-label>
+      <input matInput type="number" formControlName="valueCond" />
+      <mat-error *ngIf="f.valueCond.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Otro Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOtherValue">
+      <mat-label>Segundo valor</mat-label>
+      <input matInput type="number" formControlName="otherValueCond" />
+      <mat-error *ngIf="f.otherValueCond.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avOptions">
+      <mat-label>Valor</mat-label>
+
+      <mat-select #select formControlName="valueOptions">
+        <mat-option [value]="type.value" *ngFor="let type of listOptions">
+          {{ type.type }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="f.valueOptions.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Valor -->
+    <mat-form-field class="field-full-width" appearance="outline" *ngIf="avDates">
+      <mat-label>Valor</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="valueDates" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="f.valueDates.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+    <!-- Mensaje -->
+    <mat-form-field class="field-full-width" appearance="outline">
+      <mat-label>Mensaje</mat-label>
+      <textarea matInput formControlName="messageCond"></textarea>
+      <mat-error *ngIf="f.messageCond.errors?.required">Debe diligenciar este campo</mat-error>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="saveCondition()" [disabled]="formAddCondition.invalid">
+    Agregar
+  </button>
+  <button mat-button [mat-dialog-close]="undefined">Cancelar</button>
+</mat-dialog-actions>
