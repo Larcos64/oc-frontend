@@ -28,6 +28,7 @@ import { DependenciesModule } from './dependencies/dependencies.module';
 import { DynamicformsModule } from './dynamicforms/dynamicforms.module';
 import { VersionsModule } from './versions/versions.module';
 import { RegformatsModule } from './regformats/regformats.module';
+import { ConditionsModule } from "./conditions/conditions.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -56,6 +57,7 @@ import { RegformatsModule } from './regformats/regformats.module';
     MatModule,
     FormsModule,
     ReactiveFormsModule,
+    ConditionsModule,
   ],
   providers: [VocabularyService],
   bootstrap: [AppComponent],

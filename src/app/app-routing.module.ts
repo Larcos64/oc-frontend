@@ -17,6 +17,7 @@ import { versionRoutes } from './versions/versions.routing';
 import { regformatsRoutes } from './regformats/regformats.routing';
 import { dependenciesRoutes } from './dependencies/dependencies.routing';
 import { dynamicformsRoutes } from './dynamicforms/dynamicforms.routing';
+import { conditionsRoutes } from "./conditions/conditions.routing";
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
       ...versionRoutes,
       ...regformatsRoutes,
       ...dependenciesRoutes,
+      ...conditionsRoutes,
       { path: "homePage", component: HomePageComponent },
       { path: "", redirectTo: "companies", pathMatch: "full" },
     ],
