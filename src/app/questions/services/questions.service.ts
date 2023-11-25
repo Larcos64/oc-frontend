@@ -23,7 +23,7 @@ export class QuestionsService {
   }
 
   listByIdSecFill(idSec: number, idVersion: number): Observable<ActQues[]> {
-    const url = `${environment.urlBase}/question/id_sec/${idSec}/id_version/${idVersion}`;
+    const url = `${environment.urlBase}/question/id_sec/${idSec}/id_sv/${idVersion}`;
     return this.http.get<Rspn<ActQues[]>>(url)
       .pipe(
         map(x => validate<ActQues[]>(x)

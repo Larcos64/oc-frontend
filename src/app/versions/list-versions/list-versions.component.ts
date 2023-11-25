@@ -186,9 +186,9 @@ export class ListVersionsComponent implements OnInit {
         autoFocus: false,
         data: {
           version: {
-            idVersion: element.id_version,
-            idFormat: element.id_format,
-            codVersion: element.cod_version,
+            idVersion: element.id_sv,
+            idFormat: element.id_survey,
+            codVersion: element.cod_sv,
             version: element.version,
           },
         },
@@ -209,8 +209,8 @@ export class ListVersionsComponent implements OnInit {
       autoFocus: false,
       data: {
         version: {
-          idVersion: element.id_version,
-          codVersion: element.cod_version,
+          idVersion: element.id_sv,
+          codVersion: element.cod_sv,
           version: element.version,
         },
       },

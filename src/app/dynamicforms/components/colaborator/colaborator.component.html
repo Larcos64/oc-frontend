@@ -1,0 +1,42 @@
+<!-- <div *ngIf="!itemVaalue"> -->
+    <ng-template matStepLabel> Seleccione un colaborador </ng-template>
+    <mat-form-field appearance="fill" class="field-full-width dynamic-field"  [formGroup]="form">
+        <mat-label>{{field.label}}</mat-label>
+        <mat-select [placeholder]="field.label" [formControlName]="field.name" (selectionChange)="selectChange($event)" [multiple]="multiple">
+            <mat-option *ngFor="let collaborator of collaborators" [value]="collaborator">
+                {{collaborator.nameCol + ' ' +collaborator.lastnameCol}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <!-- <div style="margin-top: 1rem;"> -->
+    
+    <!-- </div> -->
+    <div class="coll-info" *ngIf="collaboratorSelected && field.itemValue ">
+        <div class="info-label">
+            <mat-label> <b>Identificación: </b></mat-label>
+            <mat-label>{{collaboratorSelected.identCol}}</mat-label>
+        </div>
+        <div class="info-label">
+            <mat-label><b>Nombre Completo: </b></mat-label>
+            <mat-label>{{collaboratorSelected.nameCol +' '+collaboratorSelected.lastnameCol}}</mat-label>
+        </div>
+        <div class="info-label">
+            <mat-label><b>Area: </b></mat-label>
+            <mat-label>{{collaboratorSelected.area}}</mat-label>
+        </div>
+        <div class="info-label">
+            <mat-label><b>Cargo: </b></mat-label>
+            <mat-label>{{collaboratorSelected.position}}</mat-label>
+        </div>
+    </div>
+<!-- </div>
+<div *ngIf="itemVaalue">
+    <mat-form-field appearance="fill" class="field-full-width dynamic-field"  [formGroup]="form">
+        <mat-label>{{field.label}}</mat-label>
+        <mat-select [placeholder]="field.label" [formControlName]="field.name" (selectionChange)="selectChange($event)">
+            <mat-option *ngFor="let collaborator of collaborators" [value]="collaborator">
+                {{collaborator.nameCol + ' ' +collaborator.lastnameCol}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div> -->

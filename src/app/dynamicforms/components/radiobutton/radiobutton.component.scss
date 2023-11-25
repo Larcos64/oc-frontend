@@ -1,0 +1,21 @@
+.radio-label-padding {
+  padding-right: 10px;
+  color: grey;
+}
+
+.radio-button-padding {
+  padding-right: 10px;
+  color: grey;
+}
+
+.parent{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.item-observation{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

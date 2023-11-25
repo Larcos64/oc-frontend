@@ -14,7 +14,10 @@ import { questionsRoutes } from './questions/questions.routing';
 import { optionsRoutes } from './options/options.routing';
 import { compformatsRoutes } from './compformat/compformats.routing';
 import { versionRoutes } from './versions/versions.routing';
+import { regformatsRoutes } from './regformats/regformats.routing';
 import { dependenciesRoutes } from './dependencies/dependencies.routing';
+import { dynamicformsRoutes } from './dynamicforms/dynamicforms.routing';
+import { conditionsRoutes } from "./conditions/conditions.routing";
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },
   { path: "login", component: LoginComponent },
@@ -30,10 +33,13 @@ const routes: Routes = [
       ...questionsRoutes,
       ...optionsRoutes,
       ...compformatsRoutes,
+      ...dynamicformsRoutes,
       ...companiesRoutes,
       ...workplacesRoutes,
       ...versionRoutes,
+      ...regformatsRoutes,
       ...dependenciesRoutes,
+      ...conditionsRoutes,
       { path: "homePage", component: HomePageComponent },
       { path: "", redirectTo: "companies", pathMatch: "full" },
     ],

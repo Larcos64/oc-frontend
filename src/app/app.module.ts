@@ -25,7 +25,10 @@ import { OptionsModule } from './options/options.module';
 import { QuestionsModule } from './questions/questions.module';
 import { DependenciesModule } from './dependencies/dependencies.module';
 
+import { DynamicformsModule } from './dynamicforms/dynamicforms.module';
 import { VersionsModule } from './versions/versions.module';
+import { RegformatsModule } from './regformats/regformats.module';
+import { ConditionsModule } from "./conditions/conditions.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,8 +45,10 @@ import { VersionsModule } from './versions/versions.module';
     SectionsModule,
     CompformatModule,
     VersionsModule,
+    RegformatsModule,
     OptionsModule,
     DependenciesModule,
+    DynamicformsModule,
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,
@@ -52,6 +57,7 @@ import { VersionsModule } from './versions/versions.module';
     MatModule,
     FormsModule,
     ReactiveFormsModule,
+    ConditionsModule,
   ],
   providers: [VocabularyService],
   bootstrap: [AppComponent],
