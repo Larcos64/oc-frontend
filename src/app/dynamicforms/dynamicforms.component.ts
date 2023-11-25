@@ -196,7 +196,8 @@ export class DynamicformsComponent implements OnInit {
     this.serviceFs.listByIdFormFill(this.registerFormat.idFormat, this.registerFormat.idVersion).subscribe(fs => {
       this.dataFs = fs;
       this.dataSecs = fs;
-
+      console.log("this.dataFs: ", this.dataFs);
+      
       var numSecs = this.dataFs.length;
 
       this.percentagePart = 100 / numSecs;
