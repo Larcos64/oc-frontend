@@ -37,10 +37,12 @@ export class ListFormatsComponent implements OnInit {
   permAssignToCompanies = this.servicePermits.validatePermit(
     "Formatos.asignarEmpresas"
   );
-  permFormatVersions = this.servicePermits.validatePermit("Formatos.versiones");
-  permCreate = this.servicePermits.validatePermit("Formatos.crear");
-  permEdit = this.servicePermits.validatePermit("Formatos.editar");
-  permDel = this.servicePermits.validatePermit("Formatos.eliminar");
+  permFormatVersions = this.servicePermits.validatePermit(
+    "Encuestas.versiones"
+  );
+  permCreate = this.servicePermits.validatePermit("Encuestas.crear");
+  permEdit = this.servicePermits.validatePermit("Encuestas.editar");
+  permDel = this.servicePermits.validatePermit("Encuestas.eliminar");
 
   constructor(
     private router: Router,

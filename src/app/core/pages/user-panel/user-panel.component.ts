@@ -21,7 +21,6 @@ export class UserPanelComponent implements OnInit {
   identUser: string;
   nameUser: string;
   lastnameUser: string;
-  rhUser: string;
   genderUser: string;
   dateBirthUser: string;
   entailmentDateUser: string;
@@ -50,7 +49,6 @@ export class UserPanelComponent implements OnInit {
       this.identUser = this.userInfo['identUser'];
       this.nameUser = this.userInfo['nameUser'];
       this.lastnameUser = this.userInfo['lastnameUser'];
-      this.rhUser = this.userInfo['rhUser'];
       this.genderUser = this.userInfo['genderUser'];
       this.dateBirthUser = this.userInfo['dateBirthUser'];
       this.entailmentDateUser = this.userInfo['entailmentDateUser'];
@@ -58,7 +56,7 @@ export class UserPanelComponent implements OnInit {
     });
   }
 
-  editInfo(idUser: number, idComp: number, idProf: number, identUser: number, nameUser: string, lastnameUser: string, rhUser: string, genderUser: string, dateBirthUser, entailmentDateUser: number, emailUser: string) {
+  editInfo(idUser: number, idComp: number, idProf: number, identUser: number, nameUser: string, lastnameUser: string, genderUser: string, dateBirthUser, entailmentDateUser: number, emailUser: string) {
     // console.log(this.index);
     this.uiDialogRef = this.dialog.open(UserInfoDialogComponent, {
       width: '400px',
@@ -66,7 +64,7 @@ export class UserPanelComponent implements OnInit {
       closeOnNavigation: true,
       autoFocus: false,
       data: {
-        idUser, idComp, idProf, identUser, nameUser, lastnameUser, rhUser, genderUser, dateBirthUser, entailmentDateUser, emailUser
+        idUser, idComp, idProf, identUser, nameUser, lastnameUser, genderUser, dateBirthUser, entailmentDateUser, emailUser
       }
     });
 
