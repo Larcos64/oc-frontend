@@ -781,72 +781,6 @@ export class DynamicformsComponent implements OnInit {
             value: valueCond
           }
         );
-      } else if (typeCond === 'file_type') {
-        switch (cond['valueCond']) {
-          case '.png, .jpg, .jpeg':
-            validators.push(
-              {
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-        }
-      } else if (typeCond === 'file_format') {
-        switch (cond['valueCond']) {
-          case '.pdf':
-            validators.push(
-              {
-                // accept: 'application/pdf'
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-          case '.xls, .xlsx, .csv, .vnd.openxmlformats-officedocument.spreadsheetml.sheet, .vnd.ms-excel':
-            validators.push(
-              {
-                // accept: '.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-          case '.doc, .docx, .odt, .vnd.openxmlformats-officedocument.wordprocessingml.document':
-            validators.push(
-              {
-                // accept: '.doc,.docx,.xml,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-          case '.jpeg':
-            validators.push(
-              {
-                // accept: 'image/jpeg'
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-          case '.png':
-            validators.push(
-              {
-                // accept: 'image/png'
-                accept: cond['valueCond'],
-                message: cond['messageCond']
-              }
-            );
-            break;
-        }
-      } else if (typeCond === 'file_limit') {
-        validators.push(
-          {
-            name: 'file_limit',
-            limit_file: valueCond
-          }
-        )
       } else if (typeCond === 'warning') {
         validators.push(
           {
@@ -872,14 +806,21 @@ export class DynamicformsComponent implements OnInit {
     let idWp = this.registerFormat.idWorkplace;
 
     if (idWp) {
+      console.log("this.dataSecs: ", this.dataSecs);
+      
       let dsl = this.dataSecs.length;
 
       /*  value['idForm'] = this.registerFormat.idFormat;
        value['idUser'] = this.registerFormat.idUser;
        value['idVer'] = this.registerFormat.idVersion;
        value['idComp'] = this.registerFormat.idComp; */
-      value['idSec'] = this.dataSecs[step].idSection;
-      value['tableName'] = this.dataSecs[step].tableName;
+
+      // value['idSec'] = this.dataSecs[step].idSection;
+      // value['tableName'] = this.dataSecs[step].tableName;
+      value['idSec'] = this.dataSecs[step].id_sec;
+      value['tableName'] = this.dataSecs[step].table_name;
+      console.log("value: ", value);
+      
       this.dataValues[step] = value;
 
       let rc = new Array();
@@ -892,32 +833,22 @@ export class DynamicformsComponent implements OnInit {
         let colques = 'ques_' + id;
         const itemValue = rc[0][i].itemValue ? rc[0][i].itemValue : null;
 
-        if (type === 'cloud_upload') {
+        console.log("rc[0][i]: ", rc[0][i]);
+        console.log("itemValue: ", itemValue);
+        
+
+
+        if (type === 'radio_button_checked') {
           if (value[colques] != null) {
-            // let splitname = value[colques].split("\\");
-            // value[colques] = '/public/uploads/files/' + splitname[splitname.length - 1];
-            value[colques] = rc[0][i];
-            this.filesToUpload2 = this.filesToUpload2.concat(rc[0][i].value);
-            // console.log(this.filesToUpload2, "archivos", value[colques])
-            if (this.filesToUpload2.length) {
-              this.anyFile = true;
-            }
-          }
-        } else if (type === 'radio_button_checked') {
-          if (value[colques] != null) {
+            // #TODO
             value[colques] = JSON.stringify(rc[0][i].value);
           }
 
-        } else if (type === 'collaborator' && value[colques] != null) {
-          if (itemValue) {
-
-            value[colques] = value[colques].idCol
-          } else {
-            value[colques] = value[colques].map(obj => obj.idCol).join()
-          }
-          console.log(value[colques])
         }
       }
+
+      console.log("value: ", value);
+      
 
       if (step === dsl - 1) { // If the current step is the last section}
         this.saveRegister();
