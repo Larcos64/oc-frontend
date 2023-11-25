@@ -45,7 +45,7 @@
               Código
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.cod_version }}
+              {{ element.cod_sv }}
             </mat-cell>
           </ng-container>
 
@@ -65,7 +65,7 @@
               Fecha de creación
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.date_created | date: "dd/MM/yyyy" }}
+              {{ element.creation_date | date: "dd/MM/yyyy" }}
             </mat-cell>
           </ng-container>
 
@@ -75,7 +75,7 @@
               Estado
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.state_ver === true ? "Activa" : "Inactiva" }}
+              {{ element.state_sv === true ? "Activa" : "Inactiva" }}
             </mat-cell>
           </ng-container>
 

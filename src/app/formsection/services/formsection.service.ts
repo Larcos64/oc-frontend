@@ -44,7 +44,7 @@ export class FormsectionService {
   }
 
   listByIdFormFill(idFormat: number, idVersion: number): Observable<any[]> {
-    const url = `${environment.urlBase}/surveysection/id_form_f/${idFormat}/id_sv/${idVersion}`;
+    const url = `${environment.urlBase}/surveysection/id_form_f/${idFormat}/id_version/${idVersion}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
