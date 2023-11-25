@@ -41,7 +41,6 @@ export class UserInfoDialogComponent implements OnInit {
       nameUser: [this.data.nameUser, Validators.required],
       lastnameUser: [this.data.lastnameUser, Validators.required],
       emailUser: [this.data.emailUser, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-      rhUser: [this.data.rhUser, Validators.required],
       genderUser: [this.data.genderUser, Validators.required],
       dateBirthUser: [this.data.dateBirthUser, Validators.required],
       entailmentDateUser: [this.data.entailmentDateUser, Validators.required]

@@ -1,13 +1,10 @@
-<h1 mat-dialog-title>
-  Asignar a empresas
-</h1>
+<h1 mat-dialog-title>Asignar a empresas</h1>
 <mat-dialog-content>
   <mat-grid-list cols="2" rowHeight="4:1">
-
-    <!-- Formato -->
+    <!-- Encuesta -->
     <mat-grid-tile>
       <div class="text-inside-grid">
-        <b>Formato:</b>
+        <b>Encuesta:</b>
       </div>
     </mat-grid-tile>
     <mat-grid-tile>{{ data.nameFormat }}</mat-grid-tile>
@@ -15,14 +12,13 @@
     <mat-grid-tile colspan="2">
       <h3><b>Empresas</b></h3>
     </mat-grid-tile>
-
   </mat-grid-list>
 
   <form [formGroup]="form" #formEditCompanies="ngForm">
-    <label formArrayName="companies" *ngFor="
-        let company of form.controls.companies.controls;
-        let i = index
-      ">
+    <label
+      formArrayName="companies"
+      *ngFor="let company of form.controls.companies.controls; let i = index"
+    >
       <mat-checkbox color="accent" [formControlName]="i">
         {{ companiesData[i].nameComp }}
       </mat-checkbox>
@@ -34,8 +30,12 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="buildCompanies()" [disabled]="!formEditCompanies.dirty || loading"
-    [class.spinner]="loading">
+  <button
+    mat-button
+    (click)="buildCompanies()"
+    [disabled]="!formEditCompanies.dirty || loading"
+    [class.spinner]="loading"
+  >
     Asignar
   </button>
   <button mat-button [mat-dialog-close]="undefined" tabindex="-1">
