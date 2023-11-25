@@ -1,0 +1,255 @@
+<mat-toolbar>
+
+  <mat-toolbar-row class="toolbar-row-title">
+    <h1>Reportes
+      <!--{{codVer}} (v.{{ver}})-->
+    </h1>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="toolbar-row-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+          <ng-container *ngIf="!navlink.url">
+            <span class="link">{{navlink.name}}</span>
+          </ng-container>
+        </li>
+      </ol>
+    </nav>
+    <!-- <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button> -->
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<div class="container mat-elevation-z2">
+  <mat-card>
+    <mat-card-content>
+      <div>
+
+        <form [formGroup]="form" #formSearchRf="ngForm">
+          <!-- Empresa -->
+          <mat-form-field class="field-full-width" appearance="outline">
+            <mat-label>Empresa</mat-label>
+            <mat-select formControlName="id_comp" (selectionChange)="onCompChange($event)">
+              <mat-option [value]="comp.idComp" *ngFor="let comp of companies">
+                {{ comp.nameComp}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- rowHeight="8:1" -->
+          <!-- <mat-grid-list cols="2" rowHeight="100px"> -->
+          <!-- rowHeight="3:0.5" -->
+          <!-- <mat-grid-list [cols]="breakpoint" rowHeight="3:0.5" (window:resize)="onResize($event)"> -->
+          <mat-grid-list [cols]="breakpoint" rowHeight="75px" (window:resize)="onResize($event)">
+
+            <mat-grid-tile class="form-grid">
+              <!-- Formato -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Formato</mat-label>
+                <mat-select formControlName="id_format" (selectionChange)="onFormChange($event)">
+                  <mat-option [value]="form.id_format" *ngFor="let form of compformats">
+                    {{ form.name_format}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <!-- Version -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Version</mat-label>
+                <mat-select formControlName="id_version">
+                  <mat-option [value]="ver.id_version" *ngFor="let ver of versions">
+                    {{ver.cod_version}} (v.{{ver.version}})
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <!-- </mat-grid-list> -->
+
+            <!-- Por fecha -->
+            <mat-grid-tile [colspan]="colspan">
+              <label>Filtrar por fecha:</label>&nbsp;&nbsp;
+              <mat-radio-group formControlName="for_date">
+                <mat-radio-button type="radio" name="for_date" value="init">Inicial</mat-radio-button>
+                &nbsp;&nbsp;
+                <mat-radio-button type="radio" name="for_date" value="end">Final</mat-radio-button>
+              </mat-radio-group>
+            </mat-grid-tile>
+
+            <!-- <mat-grid-list [cols]="breakpoint" rowHeight="70px" (window:resize)="onResize($event)"> -->
+            <mat-grid-tile>
+              <!-- Inicio -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Inicio</mat-label>
+                <input matInput [matDatepicker]="dp_init" formControlName="init_date" />
+                <mat-datepicker-toggle matSuffix [for]="dp_init"></mat-datepicker-toggle>
+                <mat-datepicker #dp_init></mat-datepicker>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <!-- Fin -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Fin</mat-label>
+                <input matInput [matDatepicker]="dp_end" formControlName="end_date" />
+                <mat-datepicker-toggle matSuffix [for]="dp_end"></mat-datepicker-toggle>
+                <mat-datepicker #dp_end></mat-datepicker>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <!-- Usuario -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Usuario</mat-label>
+                <mat-select formControlName="id_user">
+                  <mat-option [value]="user.idUser" *ngFor="let user of users">
+                    {{ user.nameUser }} {{ user.lastnameUser }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <!-- Sitio de trabajo -->
+              <mat-form-field class="field-full-width" appearance="outline">
+                <mat-label>Sitio de trabajo</mat-label>
+                <mat-select formControlName="id_wplace">
+                  <mat-option [value]="''">
+                  </mat-option>
+                  <mat-option [value]="wplace.idWorkplace" *ngFor="let wplace of wplaces">
+                    {{ wplace.nameWorkplace }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Fecha Inicio</mat-label>
+            <input matInput [matDatepicker]="init_picker" formControlName="init_date_rf" />
+            <mat-datepicker-toggle matSuffix [for]="init_picker"></mat-datepicker-toggle>
+            <mat-datepicker #init_picker></mat-datepicker>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha Fin</mat-label>
+            <input matInput [matDatepicker]="end_picker" placeholder="Fecha Fin" />
+            <mat-datepicker-toggle matSuffix [for]="end_picker"></mat-datepicker-toggle>
+            <mat-datepicker #end_picker></mat-datepicker>
+          </mat-form-field> -->
+
+          <div>
+            <button class="m-r-8 botones" mat-raised-button color="primary" (click)="searchRf()"
+              [disabled]="formSearchRf.invalid">Buscar</button>&nbsp;
+            <button class="m-r-8" mat-raised-button color="primary" (click)="generateReportGeneralInExcel()"
+              [disabled]="formSearchRf.invalid"  *ngIf="isLastStepCondition">Generar reporte</button>
+          </div>
+
+        </form>
+
+        <br>
+
+        <div class="form">
+          <mat-form-field class="field-full-width" appearance="legacy">
+            <mat-label>Buscar reporte</mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+              [disabled]="data.length == 0" />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+          <!-- Company -->
+          <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef>
+              Empresa
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.name_comp }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Workplace -->
+          <ng-container matColumnDef="workplace">
+            <mat-header-cell *matHeaderCellDef>
+              Sitio de trabajo
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.name_workplace }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- User -->
+          <ng-container matColumnDef="user">
+            <mat-header-cell *matHeaderCellDef>
+              Usuario
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.name_user }} {{ element.lastname_user }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Init date -->
+          <ng-container matColumnDef="init_date_rf">
+            <mat-header-cell *matHeaderCellDef>
+              Fecha de inicio
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.init_date_rf | date: "dd/MM/yyyy" }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- End date -->
+          <ng-container matColumnDef="fin_date_rf">
+            <mat-header-cell *matHeaderCellDef>
+              Fecha de fin
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.fin_date_rf | date: "dd/MM/yyyy" }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              Acciones
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element; let i = index">
+
+              <!-- Fill Format -->
+              <button mat-icon-button color="primary"
+                (click)="reportDetail(element.id_rf, element.id_format, element.id_version, element.id_comp)">
+                <mat-icon aria-label="Visualizar" matTooltip="Visualizar" matTooltipPosition="right">visibility
+                </mat-icon>
+              </button>
+
+              <!-- Reports -->
+              <!-- <button mat-icon-button color="primary" (click)="reportsFormat(element.id_version)">
+                <mat-icon aria-label="Reportes" matTooltip="Reportes" matTooltipPosition="right">assignment_turned_in
+                </mat-icon>
+              </button> -->
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsRf"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsRf"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -88,13 +88,13 @@
             <mat-cell *matCellDef="let element; let i = index">
 
               <!-- Fill Format -->
-              <button mat-icon-button color="primary" (click)="fillFormat(element.id_version)" *ngIf="permFillout">
+              <button mat-icon-button color="primary" (click)="fillFormat(element.id_sv)" *ngIf="permFillout">
                 <mat-icon aria-label="Diligenciar" matTooltip="Diligenciar" matTooltipPosition="right">assignment
                 </mat-icon>
               </button>
 
               <!-- Reports -->
-              <!-- <button mat-icon-button color="primary" (click)="reportsFormat(element.id_version)">
+              <!-- <button mat-icon-button color="primary" (click)="reportsFormat(element.id_sv)">
                 <mat-icon aria-label="Reportes" matTooltip="Reportes" matTooltipPosition="right">assignment_turned_in
                 </mat-icon>
               </button> -->

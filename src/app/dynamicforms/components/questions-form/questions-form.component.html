@@ -1,0 +1,42 @@
+<div [formGroup]="form">
+
+  <div [ngSwitch]="field.type">
+
+    <div *ngSwitchCase="'short_text'">
+      <app-input *ngIf='field.visibilityQues' [field]="field" [form]="form"></app-input>
+    </div>
+    <div *ngSwitchCase="'money'">
+      <app-input *ngIf='field.visibilityQues' [field]="field" [form]="form" (exampleOutputQuestion)="exampleMethodParentSelect($event)"></app-input>
+    </div>
+    <div *ngSwitchCase="'notes'">
+      <app-textarea  *ngIf='field.visibilityQues' [field]="field" [form]="form"></app-textarea>
+    </div>
+    <div *ngSwitchCase="'radio_button_checked'">
+      <app-radiobutton *ngIf='field.visibilityQues' [field]="field" [form]="form" (exampleOutputQuestion)="exampleMethodParentSelect($event)"></app-radiobutton>
+    </div>
+    <div *ngSwitchCase="'check_box'">
+      <app-checkbox *ngIf='field.visibilityQues' [field]="field" [form]="form" (exampleOutputQuestion)="exampleMethodParentSelect($event)">
+      </app-checkbox>
+    </div>
+    <div *ngSwitchCase="'arrow_drop_down_circle'">
+      <app-select *ngIf='field.visibilityQues' [field]="field" [form]="form" (exampleOutputQuestion)="exampleMethodParentSelect($event)">
+      </app-select>
+    </div>
+    <div *ngSwitchCase="'cloud_upload'">
+      <app-fileinput *ngIf='field.visibilityQues' [field]="field" [form]="form"></app-fileinput>
+    </div>
+    <div *ngSwitchCase="'event'">
+      <app-date *ngIf='field.visibilityQues' [field]="field" [form]="form" (exampleOutputQuestion)="exampleMethodParentSelect($event)"></app-date>
+    </div>
+    <div *ngSwitchCase="'collaborator'">
+      <app-colaborator *ngIf='field.visibilityQues' [field]="field" [form]="form"></app-colaborator>
+    </div>
+
+    <!-- <div class="field-full-width margin-top" *ngSwitchCase="'button'">
+      <button type="submit" mat-raised-button color="primary">{{field.label}}</button>
+    </div> -->
+
+  </div>
+
+  <!-- <div class="errorMessage" *ngIf="!isValid">{{question.label}} is required</div>  -->
+</div>

@@ -1,0 +1,16 @@
+<!-- <div class="field-full-width margin-top margin-bottom" [formGroup]="group">
+  <mat-checkbox [formControlName]="field.name">{{field.label}}</mat-checkbox>
+</div> -->
+
+<div class="dynamic-field" [formGroup]="form" >
+  <label class="radio-label-padding">{{field.label}}:</label>
+  <div [formArrayName]="field.name" *ngFor="let item of field.options; let i = index">
+    <mat-checkbox class="radio-button-padding" [value]="item" (change)="onChange(item.idOptValue, $event)">{{item.nameOptValue}}
+    </mat-checkbox>
+  </div>
+  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+    <mat-error *ngIf="form.controls[field.name].hasError(validation.name)">{{validation.message}}</mat-error>
+  </ng-container>
+</div>
+
+<!-- <pre>Form values: {{group.value | json}}</pre> -->
