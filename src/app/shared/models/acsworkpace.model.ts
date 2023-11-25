@@ -1,4 +1,4 @@
-export const TYPE_WORKPLACE = "acs_workplace";
+export const TYPE_WORKPLACE = "work_area";
 
 export class AcsWorkplace {
 

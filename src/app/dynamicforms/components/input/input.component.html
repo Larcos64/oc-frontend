@@ -1,0 +1,12 @@
+<!-- <mat-icon color="primary" style="vertical-align: center !important;" *ngIf="field.info" matTooltip="{{ field.info }}"
+  matTooltipPosition="before">info
+</mat-icon> -->
+
+<mat-form-field  class="dynamic-field"  [formGroup]="form">
+  <mat-label>{{field.label}}</mat-label>
+  <input matInput [formControlName]="field.name" [placeholder]="field.description" [type]="field.inputType" (blur)="verifyVal()">
+  <mat-hint *ngIf="field.information">{{field.information}}</mat-hint>
+  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+    <mat-error *ngIf="form.controls[field.name].hasError(validation.name)">{{validation.message}}</mat-error>
+  </ng-container>
+</mat-form-field>

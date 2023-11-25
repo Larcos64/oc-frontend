@@ -40,6 +40,7 @@ export class EditSectionsDialogComponent implements OnInit {
     this.service.listByIdForm(this.data.idFormat).subscribe(sections => {
       this.dataFs = sections;
       this.dataSource = new MatTableDataSource(this.dataFs);
+      console.log("this.dataSource: ", this.dataSource);      
       this.dataSource.paginator = this.paginator;
     });
   }
@@ -62,14 +63,14 @@ export class EditSectionsDialogComponent implements OnInit {
     });
   }
 
-  startEdit(i: number, id_fs: number, id_sec: number, id_format: number, state_fs: string, order_fs: number, name_sec: string) {
+  startEdit(i: number, id_fs: number, id_sec: number, id_format: number, state_ss: string, order_ss: number, name_sec: string) {
     this.index = i;
     this.editFsDialogRef = this.dialog.open(EditFsDialogComponent, {
       width: '400px',
       height: 'auto',
       closeOnNavigation: true,
       autoFocus: false,
-      data: { id_fs, id_sec, id_format, state_fs, order_fs, name_sec }
+      data: { id_fs, id_sec, id_format, state_ss, order_ss, name_sec }
     });
 
     this.editFsDialogRef.afterClosed().subscribe(result => {

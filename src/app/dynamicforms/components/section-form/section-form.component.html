@@ -1,0 +1,20 @@
+<form class="dynamic-form" [formGroup]="form" (submit)="onSubmit($event)">
+  <!-- 
+  <ng-container *ngFor="let field of fields;" dynamicField [field]="field" [group]="form">
+  </ng-container> -->
+
+  <div *ngFor="let question of fields" class="form-row">
+    <app-questions-form [field]="question" [form]="form" (exampleOutputToSection)="exampleMethodParent($event)">
+    </app-questions-form>
+  </div>
+
+  <div class="field-full-width margin-top">
+    <button type="submit" mat-raised-button color="primary" [disabled]="validateButtonSubmit()">Guardar sección</button>
+  </div>
+
+
+</form>
+
+<div *ngIf="payLoad" class="form-row">
+  <strong>Saved the following values</strong><br>{{payLoad}}
+</div>

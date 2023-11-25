@@ -43,7 +43,7 @@
         <ng-container matColumnDef="state">
           <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.state_fs === true ? "Activa" : "Inactiva" }}
+            {{ element.state_ss === true ? "Activa" : "Inactiva" }}
           </mat-cell>
         </ng-container>
 
@@ -53,7 +53,7 @@
             Orden
           </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            {{ element.order_fs }}
+            {{ element.order_ss }}
           </mat-cell>
         </ng-container>
 
@@ -71,8 +71,8 @@
                     element.id_fs,
                     element.id_sec,
                     element.id_format,
-                    element.state_fs,
-                    element.order_fs,
+                    element.state_ss,
+                    element.order_ss,
                     element.name_sec
                   )
                 ">

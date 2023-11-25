@@ -1,0 +1,127 @@
+<mat-toolbar>
+
+  <mat-toolbar-row class="toolbar-row-title">
+    <h1>Encuestas asignados</h1>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="toolbar-row-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+          <ng-container *ngIf="!navlink.url">
+            <span class="link">{{navlink.name}}</span>
+          </ng-container>
+        </li>
+      </ol>
+    </nav>
+    <span class="spacer"></span>
+    <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<div class="container mat-elevation-z2">
+  <mat-card>
+    <mat-card-content>
+      <div class="form">
+        <mat-form-field class="field-full-width" appearance="legacy">
+          <mat-label>Buscar formato</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar"
+            [disabled]="data.length == 0" />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2">
+          <!-- Código -->
+          <ng-container matColumnDef="cod">
+            <mat-header-cell *matHeaderCellDef>
+              Código
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.cod_format }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Nombre -->
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+              Nombre
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.name_format }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Tipo -->
+          <ng-container matColumnDef="type">
+            <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.type_format }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Fecha de emisión -->
+          <ng-container matColumnDef="issue">
+            <mat-header-cell *matHeaderCellDef>
+              Fecha de emisión
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.issue_date | date: "dd/MM/yyyy" }}
+            </mat-cell>
+          </ng-container>
+
+          <!-- Fecha de expiración -->
+          <!-- <ng-container matColumnDef="expiry">
+            <mat-header-cell *matHeaderCellDef>
+              Fecha de expiración
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              {{ element.expiry_date | date: "dd/MM/yyyy" }}
+            </mat-cell>
+          </ng-container> -->
+
+          <!-- Actions -->
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+              Acciones
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element; let i = index">
+
+              <!-- Fill Format -->
+              <!-- <button mat-icon-button color="primary" (click)="fillFormat(element.id_sat)" *ngIf="permFill">
+                <mat-icon aria-label="Diligenciar" matTooltip="Diligenciar" matTooltipPosition="right">assignment
+                </mat-icon>
+              </button> -->
+
+              <!-- List versions -->
+              <button mat-icon-button color="primary" (click)="listVersions(element.id_sat)" *ngIf="permFill" >
+                <mat-icon aria-label="Versiones" matTooltip="Versiones" matTooltipPosition="right">bookmarks
+                </mat-icon>
+              </button>
+
+            </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="columnsCompFormat"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: columnsCompFormat"></mat-row>
+        </mat-table>
+
+        <mat-paginator [length]="6" [pageIndex]="0" [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- <div class="fab" *ngIf="permCreate">
+  <button mat-fab color="accent" (click)="startAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div> -->

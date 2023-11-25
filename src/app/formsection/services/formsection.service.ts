@@ -15,28 +15,28 @@ export class FormsectionService {
   constructor(private http: HttpClient) { }
 
   add(item: ActFormatSection): Observable<string> {
-    const url = `${environment.urlBase}/formsection/`;
+    const url = `${environment.urlBase}/surveysection/`;
     return this.http.post<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   edit(item: ActFormatSection): Observable<string> {
-    const url = `${environment.urlBase}/formsection/`;
+    const url = `${environment.urlBase}/surveysection/`;
     return this.http.put<Rspn<string>>(url, item).pipe(
       map(x => validate(x))
     );
   }
 
   delete(id: number): Observable<string> {
-    const url = `${environment.urlBase}/formsection/${id}`;
+    const url = `${environment.urlBase}/surveysection/${id}`;
     return this.http.delete<Rspn<string>>(url).pipe(
       map(x => validate(x))
     );
   }
 
   listByIdForm(idFormat: number): Observable<any[]> {
-    const url = `${environment.urlBase}/formsection/id_form/${idFormat}`;
+    const url = `${environment.urlBase}/surveysection/id_form/${idFormat}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
@@ -44,7 +44,7 @@ export class FormsectionService {
   }
 
   listByIdFormFill(idFormat: number, idVersion: number): Observable<any[]> {
-    const url = `${environment.urlBase}/formsection/id_form_f/${idFormat}/id_version/${idVersion}`;
+    const url = `${environment.urlBase}/surveysection/id_form_f/${idFormat}/id_sv/${idVersion}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
