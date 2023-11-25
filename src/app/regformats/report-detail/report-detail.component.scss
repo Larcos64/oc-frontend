@@ -1,0 +1,69 @@
+.toolbar-row-title {
+  height: 30px;
+  margin-top: 10px;
+}
+
+.toolbar-row-breadcrumb {
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.head-format {
+  width: 100%;
+}
+
+.td-head-format-logo {
+  width: 10%;
+  text-align: center;
+}
+
+.td-head-format-title {
+  width: 60%;
+  text-align: center;
+}
+
+.td-head-format-info {
+  width: 15%;
+}
+
+// Accordion
+.example-headers-align .mat-expansion-panel-header-title {
+  font-size: 20px !important;
+  text-align: center !important;
+  display: inline !important;
+}
+
+.mat-expansion-panel h4 {
+  font-size: 18px !important;
+}
+
+.mat-expansion-panel p {
+  font-size: 18px !important;
+}
+
+/* .example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+} */
+
+.icon-display {
+  // transform: scale(1);
+  font-size: 40px;
+}
+
+.fx-spacer {
+  flex: 1 1 auto;
+}

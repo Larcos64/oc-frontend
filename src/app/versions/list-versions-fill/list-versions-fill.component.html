@@ -45,7 +45,7 @@
               Código
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.cod_version }}
+              {{ element.cod_sv }}
             </mat-cell>
           </ng-container>
 
@@ -65,7 +65,7 @@
               Fecha de creación
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.date_created | date: "dd/MM/yyyy" }}
+              {{ element.creation_date | date: "dd/MM/yyyy" }}
             </mat-cell>
           </ng-container>
 
@@ -75,7 +75,7 @@
               Estado
             </mat-header-cell>
             <mat-cell *matCellDef="let element">
-              {{ element.state_ver === true ? "Activa" : "Inactiva" }}
+              {{ element.state_sv === true ? "Activa" : "Inactiva" }}
             </mat-cell>
           </ng-container>
 
@@ -88,13 +88,13 @@
             <mat-cell *matCellDef="let element; let i = index">
 
               <!-- Fill Format -->
-              <button mat-icon-button color="primary" (click)="fillFormat(element.id_version)" *ngIf="permFillout">
+              <button mat-icon-button color="primary" (click)="fillFormat(element.id_sv)" *ngIf="permFillout">
                 <mat-icon aria-label="Diligenciar" matTooltip="Diligenciar" matTooltipPosition="right">assignment
                 </mat-icon>
               </button>
 
               <!-- Reports -->
-              <!-- <button mat-icon-button color="primary" (click)="reportsFormat(element.id_version)">
+              <!-- <button mat-icon-button color="primary" (click)="reportsFormat(element.id_sv)">
                 <mat-icon aria-label="Reportes" matTooltip="Reportes" matTooltipPosition="right">assignment_turned_in
                 </mat-icon>
               </button> -->

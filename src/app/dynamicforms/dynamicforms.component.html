@@ -1,0 +1,137 @@
+<mat-toolbar>
+
+  <mat-toolbar-row class="toolbar-row-title">
+    <h1>Diligenciar {{ nameForm }}</h1>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="toolbar-row-breadcrumb">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item" *ngFor="let navlink of breadcrumb; let i = index">
+          <a *ngIf="navlink.url" routerLink="{{navlink.url}}" class="link">{{navlink.name}}</a>
+          <mat-icon class="chevron" *ngIf="i != (breadcrumb.length - 1)">chevron_right</mat-icon>
+          <ng-container *ngIf="!navlink.url">
+            <span class="link">{{navlink.name}}</span>
+          </ng-container>
+        </li>
+      </ol>
+    </nav>
+    <span class="spacer"></span>
+    <!-- <button mat-icon-button matTooltip="Refrescar" matTooltipPosition="left" (click)="refresh()">
+      <mat-icon>refresh</mat-icon>
+    </button> -->
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- <div class="form"> -->
+<div class="container mat-elevation-z2">
+  <mat-card>
+    <mat-card-content>
+
+      <table class="head-format" border="1" cellspacing="0" cellpadding="3">
+        <tr>
+          <td class="td-head-format-logo" rowspan="4">
+            <img [src]="logoComp || 'assets/img/no-image.png'" width="64" />
+          </td>
+          <td class="td-head-format-title" rowspan="4">
+            <h1>
+              {{ nameForm }}
+            </h1>
+          </td>
+        </tr>
+        <tr>
+          <td class="td-head-format-info">Código</td>
+          <td class="td-head-format-info">{{codVersion}}</td>
+        </tr>
+        <tr>
+          <td class="td-head-format-info">Versión</td>
+          <td class="td-head-format-info">{{numVersion}}</td>
+        </tr>
+        <tr>
+          <td class="td-head-format-info">Fecha</td>
+          <td class="td-head-format-info">{{dateVersion | date}}</td>
+        </tr>
+      </table>
+
+      <!-- <ng-template #loader>
+        <app-loader [align]="'center'"></app-loader>
+      </ng-template> -->
+
+      <ng-template #loader>
+
+        <div style="display: flex">
+          <mat-chip-list aria-label="Error" style="margin: 0 auto;">
+            <mat-chip color="primary" selected>
+              <mat-icon aria-hidden="false">info</mat-icon> Construyendo formato, por favor espere...
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+        <br>
+        <mat-progress-bar #loader mode="determinate" [value]="percentage"></mat-progress-bar>
+      </ng-template>
+
+      <div *ngIf="error" style="display: flex">
+        <mat-chip-list aria-label="Error" style="margin: 0 auto;">
+          <mat-chip color="primary" selected>
+            <mat-icon aria-hidden="false">info</mat-icon> {{error}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <!-- <mat-label>Puesto de trabajo</mat-label> -->
+        <mat-form-field appearance="fill" class="field-full-width" id="fieldWPlace">
+          <mat-label>Puesto de trabajo</mat-label>
+          <mat-select [(ngModel)]="workPlaceSelected">
+            <mat-option *ngFor="let workplace of workplaces" [value]="workplace.idWorkplace" (click)="logRegister()">
+              {{workplace.nameWorkplace}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <mat-vertical-stepper linear="true" #stepper *ngIf="regConfig.length>0; else loader" labelPosition="bottom">
+        <mat-step [stepControl]="i" *ngFor="let form of regConfig; let i = index">
+
+          <ng-template matStepLabel> {{form[0]['nameSection']}} </ng-template>
+          <button class="anterior" matStepperPrevious mat-raised-button color="accent" *ngIf="i>0">Anterior</button><br>
+          <section-form [fields]="form" (submit)="submit($event, i)"
+            (exampleOutputToDynamicForms)="exampleMethodParentDynamic($event)">
+          </section-form>
+        </mat-step>
+      </mat-vertical-stepper>
+
+      <!-- <dynamic-form [fields]="regConfig" (submit)="submit($event)" *ngIf="regConfig.length>0">
+          </dynamic-form> -->
+      <mat-card class="table-small" *ngIf="filesToUpload2.length && showTableFiles">
+        <mat-label>Subiendo Archivos...</mat-label>
+        <mat-progress-bar mode="buffer"></mat-progress-bar>
+
+        <table mat-table [dataSource]="filesToUpload">
+
+          <ng-container matColumnDef="Nombre">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.nameFile}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Tamaño">
+            <th mat-header-cell *matHeaderCellDef> Tamaño </th>
+            <td mat-cell *matCellDef="let element"> {{element.file.size / 1024 / 1024 | number: '.2-2'}} MB</td>
+          </ng-container>
+          <ng-container matColumnDef="progreso">
+            <th mat-header-cell *matHeaderCellDef> progreso </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-progress-bar mode="determinate" [value]="element.progress"></mat-progress-bar>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+      </mat-card>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+<!-- </div> -->

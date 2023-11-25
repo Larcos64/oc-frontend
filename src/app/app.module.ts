@@ -25,7 +25,9 @@ import { OptionsModule } from './options/options.module';
 import { QuestionsModule } from './questions/questions.module';
 import { DependenciesModule } from './dependencies/dependencies.module';
 
+import { DynamicformsModule } from './dynamicforms/dynamicforms.module';
 import { VersionsModule } from './versions/versions.module';
+import { RegformatsModule } from './regformats/regformats.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,8 +44,10 @@ import { VersionsModule } from './versions/versions.module';
     SectionsModule,
     CompformatModule,
     VersionsModule,
+    RegformatsModule,
     OptionsModule,
     DependenciesModule,
+    DynamicformsModule,
     ProfilesModule,
     PermissionsModule,
     PermisrolModule,

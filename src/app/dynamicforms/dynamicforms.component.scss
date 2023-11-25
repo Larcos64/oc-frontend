@@ -1,0 +1,58 @@
+// body {
+//   margin: 0;
+// }
+
+// .form {
+//   margin-left: 10px;
+//   margin-right: 10px;
+//   border: 2px solid lightgray;
+//   width: 100%;
+//   padding-left: 5px;
+//   margin-top: 10px;
+// }
+
+.toolbar-row-title {
+  height: 30px;
+  margin-top: 10px;
+}
+
+.toolbar-row-breadcrumb {
+  min-height: 30px;
+  margin-bottom: 10px;
+}
+
+.head-format {
+  width: 100%;
+}
+
+.td-head-format-logo {
+  width: 10%;
+  text-align: center;
+}
+
+.td-head-format-title {
+  width: 60%;
+  text-align: center;
+}
+
+.td-head-format-info {
+  width: 15%;
+}
+
+table {
+  width: 100%;
+}
+
+.table-small{
+  min-width: 100px;
+  max-width: 600px;
+}
+
+::ng-deep .mat-vertical-stepper-header{
+  pointer-events: none !important;
+}
+
+.anterior{
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}

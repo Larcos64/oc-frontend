@@ -1,0 +1,19 @@
+
+<!-- <mat-form-field class="dynamic-field" [formGroup]="group">
+  <mat-select [placeholder]="field.label" [formControlName]="field.name"
+   (selectionChange)="selectChange($event)">
+    <mat-option *ngFor="let item of field.options" [value]="item">{{item}}</mat-option>
+  </mat-select>
+  <mat-hint *ngIf="field.information">{{field.information}}</mat-hint>
+</mat-form-field> -->
+
+<mat-form-field class="dynamic-field" [formGroup]="form" >
+  <mat-select [placeholder]="field.label" [formControlName]="field.name"
+    (selectionChange)="selectChange($event)">
+    <mat-option *ngFor="let item of field.options" [value]="item.idOptValue">{{item.nameOptValue}}</mat-option>
+  </mat-select>
+  <mat-hint *ngIf="field.information">{{field.information}}</mat-hint>
+  <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+    <mat-error *ngIf="form.controls[field.name].hasError(validation.name)">{{validation.message}}</mat-error>
+  </ng-container>
+</mat-form-field>
