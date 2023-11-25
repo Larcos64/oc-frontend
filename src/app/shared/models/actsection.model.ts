@@ -1,7 +1,6 @@
 export const TYPE_SECTION = "act_section";
 
 export class ActSection {
-
   public constructor(init?: Partial<ActSection>) {
     Object.assign(this, init);
   }
@@ -11,5 +10,4 @@ export class ActSection {
   descSection: string;
   typeSection: string;
   tableName: string;
-  cycle:string;
 }

@@ -46,7 +46,7 @@ export class CompformatService {
   }
 
   cfById(idCf: number): Observable<any[]> {
-    const url = `${environment.urlBase}/surveyassignment/id_cf/${idCf}`;
+    const url = `${environment.urlBase}/surveyassignment/id_sat/${idCf}`;
     return this.http.get<Rspn<any[]>>(url)
       .pipe(
         map(x => validate<any[]>(x)
