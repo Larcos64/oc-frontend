@@ -48,7 +48,6 @@ export class AddUserDialogComponent implements OnInit {
       emailUser: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       passUser: ['', Validators.required],
       passUser2: ['', Validators.required],
-      rhUser: ['', Validators.required],
       genderUser: ['', Validators.required],
       dateBirthUser: ['', Validators.required],
       entailmentDateUser: ['', Validators.required]

@@ -51,7 +51,6 @@ export class EditUserDialogComponent implements OnInit {
       emailUser: [this.data.emailUser, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
       passUser: [{ value: '', disabled: true }],
       passUser2: [{ value: '', disabled: true }],
-      rhUser: [this.data.rhUser, Validators.required],
       genderUser: [this.data.genderUser, Validators.required],
       dateBirthUser: [this.data.dateBirthUser, Validators.required],
       entailmentDateUser: [this.data.entailmentDateUser, Validators.required]

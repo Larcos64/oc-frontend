@@ -88,7 +88,7 @@ export class ListUsersComponent implements OnInit {
   }
 
   startEdit(i: number, idUser: number, idProf: number, idComp: number, identUser: string, nameUser: string, lastnameUser: string,
-    emailUser: string, passUser: string, rhUser: string, genderUser: string, dateBirthUser, entailmentDateUser) {
+    emailUser: string, passUser: string, genderUser: string, dateBirthUser, entailmentDateUser) {
     // index row is used just for debugging proposes and can be removed
     this.index = i;
     // console.log(this.index);
@@ -98,7 +98,7 @@ export class ListUsersComponent implements OnInit {
       closeOnNavigation: true,
       autoFocus: false,
       data: {
-        idUser, idProf, idComp, identUser, nameUser, lastnameUser, emailUser, passUser, rhUser, genderUser, dateBirthUser, entailmentDateUser
+        idUser, idProf, idComp, identUser, nameUser, lastnameUser, emailUser, passUser, genderUser, dateBirthUser, entailmentDateUser
       }
     });
 
