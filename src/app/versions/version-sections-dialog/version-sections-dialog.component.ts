@@ -34,6 +34,7 @@ export class VersionSectionsDialogComponent implements OnInit {
 
 
   getVersionSections() {
+    console.log("this.data: ", this.data);
     this.service.listByIdVersionInfoSection(this.data.version.idVersion).subscribe(sections => {
       this.dataFs = sections;
       this.dataSource = new MatTableDataSource(this.dataFs);

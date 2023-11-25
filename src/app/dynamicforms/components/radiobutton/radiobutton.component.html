@@ -1,0 +1,19 @@
+<div class="parent" >
+  <div class="dynamic-field margin-top" [formGroup]="form">
+    <label class="radio-label-padding">{{field.label}}:</label>
+    <mat-radio-group [formControlName]="field.name" (change)="radioChange()">
+      <mat-radio-button class="radio-button-padding" *ngFor="let item of field.options" [value]="item.idOptValue">
+        {{item.nameOptValue}}
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <ng-container *ngFor="let validation of field.validations;" ngProjectAs="mat-error">
+      <mat-error *ngIf="form.get(field.name).hasError(validation.name)">{{validation.message}}</mat-error>
+    </ng-container>
+
+  </div>
+  <div *ngIf="field.itemValue" class="item-observation">
+    <label> Observación </label>
+    <textarea cols="30" rows="4" [(ngModel)]="observation" (keyup)="radioChange()"></textarea>
+  </div>
+</div>

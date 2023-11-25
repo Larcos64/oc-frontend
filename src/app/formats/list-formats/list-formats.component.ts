@@ -32,10 +32,10 @@ export class ListFormatsComponent implements OnInit {
   index: number;
 
   permAssignSections = this.servicePermits.validatePermit(
-    "Formatos.asignarSecciones"
+    "Encuestas.asignarSecciones"
   );
   permAssignToCompanies = this.servicePermits.validatePermit(
-    "Formatos.asignarEmpresas"
+    "Encuestas.asignarEmpresas"
   );
   permFormatVersions = this.servicePermits.validatePermit(
     "Encuestas.versiones"
