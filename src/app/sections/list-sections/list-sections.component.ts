@@ -1,27 +1,26 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActSection } from '../../shared/models/actsection.model';
-import { PermitsService } from '../../core/services/permits.service';
-import { SessionService } from 'src/app/core/services/session.service';
-import { SectionsService } from '../services/sections.service';
-import { AddSectionDialogComponent } from '../add-section-dialog/add-section-dialog.component';
-import { EditSectionDialogComponent } from '../edit-section-dialog/edit-section-dialog.component';
-import { DelSectionDialogComponent } from '../del-section-dialog/del-section-dialog.component';
+import { MatTableDataSource } from "@angular/material/table";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { ActSection } from "../../shared/models/actsection.model";
+import { PermitsService } from "../../core/services/permits.service";
+import { SessionService } from "src/app/core/services/session.service";
+import { SectionsService } from "../services/sections.service";
+import { AddSectionDialogComponent } from "../add-section-dialog/add-section-dialog.component";
+import { EditSectionDialogComponent } from "../edit-section-dialog/edit-section-dialog.component";
+import { DelSectionDialogComponent } from "../del-section-dialog/del-section-dialog.component";
 
 @Component({
-  selector: 'app-list-sections',
-  templateUrl: './list-sections.component.html',
-  styleUrls: ['./list-sections.component.scss']
+  selector: "app-list-sections",
+  templateUrl: "./list-sections.component.html",
+  styleUrls: ["./list-sections.component.scss"],
 })
 export class ListSectionsComponent implements OnInit {
-
   data = new Array();
   breadcrumb = new Array();
-  columnsFormat: string[] = ['name', 'type', 'actions'];
+  columnsFormat: string[] = ["name", "type", "actions"];
   dataSource: MatTableDataSource<ActSection>;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -30,25 +29,31 @@ export class ListSectionsComponent implements OnInit {
   delDialogRef: MatDialogRef<DelSectionDialogComponent>;
   index: number;
 
-  permQuestions = this.servicePermits.validatePermit('Secciones.preguntas');
-  permDependencies = this.servicePermits.validatePermit('Secciones.dependencias');
-  permCreate = this.servicePermits.validatePermit('Secciones.crear');
-  permEdit = this.servicePermits.validatePermit('Secciones.editar');
-  permDel = this.servicePermits.validatePermit('Secciones.eliminar');
+  permQuestions = this.servicePermits.validatePermit("Secciones.preguntas");
+  permDependencies = this.servicePermits.validatePermit(
+    "Secciones.dependencias"
+  );
+  permCreate = this.servicePermits.validatePermit("Secciones.crear");
+  permEdit = this.servicePermits.validatePermit("Secciones.editar");
+  permDel = this.servicePermits.validatePermit("Secciones.eliminar");
 
-  constructor(private service: SectionsService, public dialog: MatDialog, private router: Router,
-    public servicePermits: PermitsService) { }
+  constructor(
+    private service: SectionsService,
+    public dialog: MatDialog,
+    private router: Router,
+    public servicePermits: PermitsService
+  ) {}
 
   ngOnInit() {
     this.getSections();
-      this.breadcrumb.push(
-        { url: '/home/homePage', name: 'Inicio' },
-        { url: '', name: 'Secciones' },
-      );
+    this.breadcrumb.push(
+      { url: "/home/homePage", name: "Inicio" },
+      { url: "", name: "Secciones" }
+    );
   }
 
   getSections() {
-    this.service.list().subscribe(sections => {
+    this.service.list().subscribe((sections) => {
       this.data = sections;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
@@ -61,30 +66,41 @@ export class ListSectionsComponent implements OnInit {
 
   startAdd(): void {
     this.addDialogRef = this.dialog.open(AddSectionDialogComponent, {
-      width: '400px',
-      height: 'auto',
+      width: "400px",
+      height: "auto",
       closeOnNavigation: true,
       autoFocus: false,
     });
 
-    this.addDialogRef.afterClosed().subscribe(result => {
+    this.addDialogRef.afterClosed().subscribe((result) => {
       this.getSections();
     });
   }
 
-  startEdit(i: number, idSection: number, nameSection: string, descSection: string, typeSection: string, tableName: string, cycle:string) {
+  startEdit(
+    i: number,
+    idSection: number,
+    nameSection: string,
+    descSection: string,
+    typeSection: string,
+    tableName: string
+  ) {
     this.index = i;
     this.editDialogRef = this.dialog.open(EditSectionDialogComponent, {
-      width: '400px',
-      height: 'auto',
+      width: "400px",
+      height: "auto",
       closeOnNavigation: true,
       autoFocus: false,
       data: {
-        idSection, nameSection, descSection, typeSection, tableName, cycle
-      }
+        idSection,
+        nameSection,
+        descSection,
+        typeSection,
+        tableName,
+      },
     });
 
-    this.editDialogRef.afterClosed().subscribe(result => {
+    this.editDialogRef.afterClosed().subscribe((result) => {
       this.getSections();
     });
   }
@@ -93,16 +109,22 @@ export class ListSectionsComponent implements OnInit {
     this.router.navigate(["home/questions/id_sec", idSection]);
   }
 
-  startDelete(i: number, idSection: number, nameSection: string, descSection: string, typeSection: string, cycle:string) {
+  startDelete(
+    i: number,
+    idSection: number,
+    nameSection: string,
+    descSection: string,
+    typeSection: string
+  ) {
     this.index = i;
     this.delDialogRef = this.dialog.open(DelSectionDialogComponent, {
-      width: '400px',
-      height: 'auto',
+      width: "400px",
+      height: "auto",
       closeOnNavigation: true,
-      data: { idSection, nameSection, descSection, typeSection, cycle }
+      data: { idSection, nameSection, descSection, typeSection },
     });
 
-    this.delDialogRef.afterClosed().subscribe(result => {
+    this.delDialogRef.afterClosed().subscribe((result) => {
       this.getSections();
     });
   }
@@ -120,5 +142,4 @@ export class ListSectionsComponent implements OnInit {
   viewDependencies(idSec: number) {
     this.router.navigate(["home/dependencies/id_sec", idSec]);
   }
-
 }

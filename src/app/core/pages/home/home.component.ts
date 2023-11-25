@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
         icon: "vpn_key",
       });
     }
-    this.permFormats = this.servicePermits.validatePermit("Formatos");
+    this.permFormats = this.servicePermits.validatePermit("Encuestas");
     if (this.permFormats) {
       this.fillerNav.push({
         name: "Encuestas",
@@ -120,11 +120,13 @@ export class HomeComponent implements OnInit {
         icon: "vertical_split",
       });
     }
-    this.permOptions = this.servicePermits.validatePermit('Opciones');
+    this.permOptions = this.servicePermits.validatePermit("Opciones");
     if (this.permOptions) {
-      this.fillerNav.push(
-        { name: 'Opciones', route: '../home/options', icon: 'ballot' },
-      );
+      this.fillerNav.push({
+        name: "Opciones",
+        route: "../home/options",
+        icon: "ballot",
+      });
     }
     /* this.permReports = this.servicePermits.validatePermit("Reportes");
     if (this.permReports) {
